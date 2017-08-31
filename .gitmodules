@@ -1,0 +1,4 @@
+[submodule "Runner/Assets/Scripts/Core"]
+	path = Runner/Assets/Scripts/Core
+	url = https://github.com/MovieCl1p/Core.git
+	branch = master

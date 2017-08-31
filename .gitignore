@@ -34,3 +34,4 @@ sysinfo.txt
 *.unitypackage
 Runner/Library/
 Runner/Temp/
+Runner/.vs/

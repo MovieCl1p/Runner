@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Game.Data;
+using Game.Commands;
 
 namespace Game.Gui.MainMenu
 {
@@ -19,9 +20,10 @@ namespace Game.Gui.MainMenu
 
         private void OnPLayClick()
         {
-            ViewManager.Instance.SetView(ViewNames.GameHudView);
+            StartLevelCommand startLevelCommand = new StartLevelCommand(1);
+            startLevelCommand.Execute();
 
-            ViewManager.Instance.SetViewToLayer(ViewNames.GameView, LayerNames.ThreeDLayer);
+            CloseView();
         }
     }
 }

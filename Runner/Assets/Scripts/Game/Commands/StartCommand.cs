@@ -1,10 +1,10 @@
-﻿
+﻿using Core.Commands;
 using Core.ViewManager;
 using Game.Data;
 
 namespace Game.Commands
 {
-    public class StartCommand
+    public class StartCommand : ICommand
     {
 
         public void Execute()
@@ -22,9 +22,6 @@ namespace Game.Commands
 
 
             ViewManager.Instance.RegisterView(ViewNames.GameView, LayerNames.ThreeDLayer, "GameView");
-
-
-            //ViewManager.Instance.RegisterView(ViewNames.LoaderWindow, LayerNames.WindowLayer, "Windows");
         }
     }
 }

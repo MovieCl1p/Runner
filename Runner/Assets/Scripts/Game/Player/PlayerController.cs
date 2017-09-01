@@ -5,7 +5,7 @@ using Game.Player.Control;
 
 namespace Game.Player
 {
-    public class PlayerController : BaseMonoBehaviour
+    public class PlayerController : MonoScheduledBehaviour
     {
         [SerializeField]
         private Transform _bot;
@@ -21,12 +21,16 @@ namespace Game.Player
         [SerializeField]
         private LayerMask _groundMask;
 
-        private float _maxSpeed = 1f;
-        private float _jumpForce = 400f;
+        private float _maxSpeed = 10f;
+        private float _jumpForce = 700f;
+        private float _jumpUpForce = 2f;
+        private float _jumpDownForce = 8f;
 
         private bool _jump;
         private bool _inAir;
         private bool _grounded;
+
+        private bool _active = true;
 
         protected override void Start()
         {
@@ -34,19 +38,18 @@ namespace Game.Player
 
             _control = BindManager.GetInstance<IPlayerControl>();
             _control.OnJumpClick += OnJumpClick;
+
+            ScheduleUpdate(1);
+        }
+
+        protected override void OnScheduledUpdate()
+        {
+            _active = true;
         }
 
         private void OnJumpClick()
         {
             _jump = true;
-        }
-
-        protected void Update()
-        {
-            //if (!_jump)
-            //{
-            //    _jump = Input.GetButtonDown("Jump");
-            //}
         }
         
         protected void FixedUpdate()
@@ -70,7 +73,7 @@ namespace Game.Player
             Move(1, _jump);
             _jump = false;
         }
-
+        
         public void Move(float move, bool jump)
         {
             if (_grounded)
@@ -87,14 +90,9 @@ namespace Game.Player
 
             if(_inAir)
             {
-                if (_rb.velocity.y > 0)
-                {
-                    _rb.velocity += Vector3.up * Physics.gravity.y * (1.5f) * Time.deltaTime;
-                }
-                else
-                {
-                    _rb.velocity += Vector3.up * Physics.gravity.y * (1) * Time.deltaTime;
-                }
+                float jf = (_control.IsJumpPressed ? _jumpUpForce : _jumpDownForce) * Time.deltaTime * Physics.gravity.y;
+                Vector3 dv = Vector3.up * jf;
+                _rb.velocity += dv;
             }
         }
 

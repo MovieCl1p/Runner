@@ -1,6 +1,7 @@
 ﻿using Core.Binder;
 using Core.ResourceManager;
 using Core.ViewManager;
+using Game.Components;
 using Game.Factory;
 using Game.Model;
 using Game.Player;
@@ -15,7 +16,7 @@ namespace Game.Gui.GameView
         private Transform _levelHolder;
 
         [SerializeField]
-        private Transform _cameraTransform;
+        private CameraSmoothFollow _camera;
 
         protected override void Start()
         {
@@ -25,16 +26,16 @@ namespace Game.Gui.GameView
             var loaderService = BindManager.GetInstance<ILevelLoaderService>();
             var factory = BindManager.GetInstance<GameFactory>();
 
-            var levelGo = loaderService.GetLevel(model.LevelId);
+            loaderService.GetLevel(model.LevelId, null, OnLevelLoaded);
+        }
 
+        private void OnLevelLoaded()
+        {
+            var factory = BindManager.GetInstance<GameFactory>();
             var player = factory.GetPlayer();
-
-            Vector3 localPosition = _cameraTransform.localPosition;
-            _cameraTransform.SetParent(player.transform);
-
-            _cameraTransform.localPosition = localPosition;
-
-            Debug.Break();
+            
+            _camera.CachedTransform.position = player.CachedTransform.position;
+            _camera.target = player.CachedTransform;
         }
     }
 }

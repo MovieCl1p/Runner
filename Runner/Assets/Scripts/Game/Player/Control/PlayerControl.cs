@@ -11,7 +11,17 @@ namespace Game.Player.Control
 
         public bool IsRegistered { get; set; }
 
+        public bool IsJumpPressed
+        {
+            get
+            {
+                return _jumpPress;
+            }
+        }
+
         public event Action OnJumpClick;
+
+        private bool _jumpPress = false;
 
         public PlayerControl()
         {
@@ -20,9 +30,15 @@ namespace Game.Player.Control
 
         public void OnUpdate()
         {
-            if(Input.GetMouseButtonUp(0))
+            if(Input.GetMouseButtonDown(0))
             {
+                _jumpPress = true;
                 CallJumpClick();
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                _jumpPress = false;
             }
         }
 

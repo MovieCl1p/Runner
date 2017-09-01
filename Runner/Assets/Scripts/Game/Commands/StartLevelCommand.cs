@@ -17,7 +17,7 @@ namespace Game.Commands
         public void Execute()
         {
             ViewManager.Instance.SetView(ViewNames.GameHudView);
-            ViewManager.Instance.SetViewToLayer(ViewNames.GameView, LayerNames.ThreeDLayer);
+            ViewManager.Instance.SetView(ViewNames.GameView);
         }
     }
 }

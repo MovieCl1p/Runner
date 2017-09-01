@@ -148,3 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scheduledUpdate: 0
   _levelHolder: {fileID: 4061540506290750}
+  _cameraTransform: {fileID: 4857934505047224}

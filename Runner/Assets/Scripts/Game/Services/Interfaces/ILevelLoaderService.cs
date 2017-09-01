@@ -4,7 +4,7 @@ namespace Game.Services.Interfaces
 {
     public interface ILevelLoaderService
     {
-        GameObject GetLevel(int levelId);
+        GameObject GetLevel(int levelId, Transform parent = null);
 
     }
 }

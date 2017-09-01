@@ -3,6 +3,8 @@ using Core.Binder;
 using Game.Model;
 using Game.Services;
 using Game.Services.Interfaces;
+using Game.Player.Control;
+using Game.Factory;
 
 namespace Game.Config
 {
@@ -12,6 +14,13 @@ namespace Game.Config
         {
             BindModels();
             BindServices();
+            BindInjections();
+        }
+
+        private void BindInjections()
+        {
+            BindManager.Bind<IPlayerControl>().To<PlayerControl>().ToSingleton();
+            BindManager.Bind<GameFactory>().ToSingleton();
         }
 
         private void BindModels()

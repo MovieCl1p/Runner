@@ -51,6 +51,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4857934505047224}
   - component: {fileID: 20574263614854306}
+  - component: {fileID: 114376227856737348}
   m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
@@ -107,7 +108,7 @@ Camera:
   m_GameObject: {fileID: 1925497034072554}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -135,6 +136,20 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
+--- !u!114 &114376227856737348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925497034072554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a067bcbcd501e4388d7657de5021d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  smoothDampTime: 0.2
+  cameraOffset: {x: 4.5, y: -2.5, z: 3.5}
 --- !u!114 &114415983534748710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,3 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scheduledUpdate: 0
   _levelHolder: {fileID: 4061540506290750}
+  _camera: {fileID: 114376227856737348}

@@ -19,7 +19,7 @@ namespace Game
             StartCommand start = new StartCommand();
             start.Execute();
 
-            ViewManager.Instance.SetViewToLayer(ViewNames.SplashScreen, LayerNames.ScreenLayer);
+            ViewManager.Instance.SetView(ViewNames.SplashScreen);
         }
     }
 }

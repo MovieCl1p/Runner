@@ -9,7 +9,9 @@ namespace Game.Data
 
         public const string GameView = "GameView";
 
-
+        public const string OptionsView = "OptionsView";
+        //public const string MapsView = "MapsView";
+        
 
         public const string LoaderWindow = "LoaderWindow";
     }

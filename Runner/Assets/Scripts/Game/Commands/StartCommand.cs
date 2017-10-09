@@ -20,6 +20,9 @@ namespace Game.Commands
             ViewManager.Instance.RegisterView(ViewNames.MainMenuScreen, LayerNames.ScreenLayer);
             ViewManager.Instance.RegisterView(ViewNames.GameHudView, LayerNames.ScreenLayer);
 
+            ViewManager.Instance.RegisterView(ViewNames.OptionsView, LayerNames.WindowLayer, "Windows");
+            //ViewManager.Instance.RegisterView(ViewNames.MapsView, LayerNames.WindowLayer, "Windows");
+
 
             ViewManager.Instance.RegisterView(ViewNames.GameView, LayerNames.ThreeDLayer);
         }

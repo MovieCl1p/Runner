@@ -8,17 +8,17 @@ namespace Game.Gui.MainMenu
 {
     public class MainMenuView : BaseView
     {
-        [SerializeField]private Button _playBtn;
-        [SerializeField]private Button _optionsBtn;
-        //[SerializeField]private Button _mapsView;
+        [SerializeField]private Button PlayBtn;
+        [SerializeField]private Button OptionsBtn;
+        [SerializeField]private Button MapsView;
 
         protected override void Start()
         {
             base.Start();
 
-            _playBtn.onClick.AddListener(OnPLayClick);
-            _optionsBtn.onClick.AddListener(OnOptionsClick);
-            //_mapsView.onClick.AddListener(OnMapsClick);
+            PlayBtn.onClick.AddListener(OnPLayClick);
+            OptionsBtn.onClick.AddListener(OnOptionsClick);
+            MapsView.onClick.AddListener(OnChaptersViewsClick);
         }
 
         private void OnPLayClick()
@@ -35,9 +35,10 @@ namespace Game.Gui.MainMenu
             
         }
 
-        //private void OnMapsClick()
-        //{
-        //    ViewManager.Instance.SetView("MapsView");
-        //}
+        private void OnChaptersViewsClick()
+        {
+            ViewManager.Instance.SetView(ViewNames.ChapterView);
+        }
+        
     }
 }

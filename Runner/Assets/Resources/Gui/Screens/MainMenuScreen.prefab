@@ -423,8 +423,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scheduledUpdate: 0
-  _playBtn: {fileID: 114711099814832996}
-  _optionsBtn: {fileID: 114528606600868920}
+  PlayBtn: {fileID: 114711099814832996}
+  OptionsBtn: {fileID: 114528606600868920}
+  MapsView: {fileID: 114270414783853788}
 --- !u!114 &114711099814832996
 MonoBehaviour:
   m_ObjectHideFlags: 1

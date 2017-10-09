@@ -16,15 +16,15 @@ namespace Game.Commands
 
         private void RegisterViews()
         {
-            ViewManager.Instance.RegisterView(ViewNames.SplashScreen, LayerNames.ScreenLayer, "Screens");
-            ViewManager.Instance.RegisterView(ViewNames.MainMenuScreen, LayerNames.ScreenLayer, "Screens");
-            ViewManager.Instance.RegisterView(ViewNames.GameHudView, LayerNames.ScreenLayer, "Screens");
+            ViewManager.Instance.RegisterView(ViewNames.SplashScreen, LayerNames.ScreenLayer);
+            ViewManager.Instance.RegisterView(ViewNames.MainMenuScreen, LayerNames.ScreenLayer);
+            ViewManager.Instance.RegisterView(ViewNames.GameHudView, LayerNames.ScreenLayer);
 
             ViewManager.Instance.RegisterView(ViewNames.OptionsView, LayerNames.WindowLayer, "Windows");
             ViewManager.Instance.RegisterView(ViewNames.ChapterView, LayerNames.WindowLayer, "Windows");
             
 
-            ViewManager.Instance.RegisterView(ViewNames.GameView, LayerNames.ThreeDLayer, "GameView");
+            ViewManager.Instance.RegisterView(ViewNames.GameView, LayerNames.ThreeDLayer);
         }
     }
 }

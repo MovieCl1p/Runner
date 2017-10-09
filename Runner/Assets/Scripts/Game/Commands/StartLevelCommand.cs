@@ -2,20 +2,35 @@
 using Core.Commands;
 using Core.ViewManager;
 using Game.Data;
+using Game.Factory;
 using Game.Model;
+using Game.Services.Interfaces;
 
 namespace Game.Commands
 {
     public class StartLevelCommand : ICommand
     {
+        private LevelSessionModel _levelModel;
+
         public StartLevelCommand(int levelId)
         {
-            var model = BindManager.GetInstance<LevelSessionModel>();
-            model.LevelId = levelId;
+            _levelModel = BindManager.GetInstance<LevelSessionModel>();
+            _levelModel.LevelId = levelId;
         }
 
         public void Execute()
         {
+            var loaderService = BindManager.GetInstance<ILevelLoaderService>();
+            loaderService.GetLevel(_levelModel.LevelId, null, OnLevelLoaded);
+        }
+
+        private void OnLevelLoaded()
+        {
+            var factory = BindManager.GetInstance<GameFactory>();
+            var player = factory.GetPlayer();
+
+            _levelModel.Player = player;
+
             ViewManager.Instance.SetView(ViewNames.GameHudView);
             ViewManager.Instance.SetView(ViewNames.GameView);
         }

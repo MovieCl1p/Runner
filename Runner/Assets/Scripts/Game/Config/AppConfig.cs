@@ -5,6 +5,7 @@ using Game.Services;
 using Game.Services.Interfaces;
 using Game.Player.Control;
 using Game.Factory;
+using Core.Dispatcher;
 
 namespace Game.Config
 {
@@ -19,6 +20,10 @@ namespace Game.Config
 
         private void BindInjections()
         {
+            BindManager.Bind<IDispatcher>().To<Dispatcher>().ToSingleton();
+
+
+
             BindManager.Bind<IPlayerControl>().To<PlayerControl>().ToSingleton();
             BindManager.Bind<GameFactory>().ToSingleton();
         }

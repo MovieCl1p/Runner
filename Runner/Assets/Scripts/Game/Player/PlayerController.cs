@@ -96,5 +96,10 @@ namespace Game.Player
             }
         }
 
+
+        public void OnTriggerEnter(Collider other)
+        {
+            
+        }
     }
 }

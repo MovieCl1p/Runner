@@ -1,12 +1,15 @@
-﻿using Core.Binder;
+﻿using System;
+using Core.Binder;
+using Core.Dispatcher;
 using Core.ResourceManager;
 using Core.ViewManager;
 using Game.Components;
 using Game.Factory;
-using Game.Model;
-using Game.Player;
-using Game.Services.Interfaces;
 using UnityEngine;
+using Game.Events;
+using Game.Model;
+using Core.Commands;
+using Game.Commands;
 
 namespace Game.Gui.GameView
 {
@@ -18,24 +21,36 @@ namespace Game.Gui.GameView
         [SerializeField]
         private CameraSmoothFollow _camera;
 
+        private IDispatcher _dispatcher;
+
+        private LevelSessionModel _levelModel;
+
+        private ICommand _restartLevelCommand;
+
         protected override void Start()
         {
             base.Start();
 
-            var model = BindManager.GetInstance<LevelSessionModel>();
-            var loaderService = BindManager.GetInstance<ILevelLoaderService>();
-            var factory = BindManager.GetInstance<GameFactory>();
+            _dispatcher = BindManager.GetInstance<IDispatcher>();
+            _dispatcher.AddListener(LevelEventsEnum.RestartTrigerEntered.ToString(), OnPlayerRestart);
+            
+            _levelModel = BindManager.GetInstance<LevelSessionModel>();
 
-            loaderService.GetLevel(model.LevelId, null, OnLevelLoaded);
+            _camera.CachedTransform.position = _levelModel.Player.CachedTransform.position;
+            _camera.target = _levelModel.Player.CachedTransform;
+
+            ScheduleUpdate(1, false);
         }
 
-        private void OnLevelLoaded()
+        protected override void OnScheduledUpdate()
         {
-            var factory = BindManager.GetInstance<GameFactory>();
-            var player = factory.GetPlayer();
-            
-            _camera.CachedTransform.position = player.CachedTransform.position;
-            _camera.target = player.CachedTransform;
+            base.OnScheduledUpdate();
+        }
+        
+        private void OnPlayerRestart()
+        {
+            _restartLevelCommand = new RestartLevelCommand();
+            _restartLevelCommand.Execute();
         }
     }
 }

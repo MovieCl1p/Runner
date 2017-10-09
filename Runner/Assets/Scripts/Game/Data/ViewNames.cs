@@ -11,6 +11,7 @@ namespace Game.Data
 
         public const string OptionsView = "OptionsView";
         public const string ChapterView = "ChapterView";
+        public const string LevelView = "LevelView";
         
         public const string LoaderWindow = "LoaderWindow";
     }

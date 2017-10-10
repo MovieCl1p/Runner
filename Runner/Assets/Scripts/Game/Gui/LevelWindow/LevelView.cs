@@ -4,41 +4,73 @@ using Game.Commands;
 using UnityEngine;
 using UnityEngine.UI;
 using Game.Data;
+using Game.Gui.ChapterWindow;
+using System.Collections.Generic;
 
 namespace Game.Gui.LevelWindow
 {
     public class LevelView : BaseView
     {
-        [SerializeField] private Button PlayBtn;
+        [SerializeField] private LevelItemView _item;
+
+        [SerializeField] private Transform _list;
+
         [SerializeField] private Button BackBtn;
-        [SerializeField] private Button Map1Btn;
+
+        private List<LevelItemView> _items = new List<LevelItemView>();
 
         protected override void Start()
         {
             base.Start();
 
-            PlayBtn.onClick.AddListener(OnPLayClick);
-            BackBtn.onClick.AddListener(OnBackClick);
+            List<int> list = new List<int>();
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            list.Add(4);
+            list.Add(5);
 
-            Map1Btn.onClick.AddListener(OnMap1Click);
+            UpdateView(list);
         }
 
-        private void OnMap1Click()
+        public void UpdateView(List<int> levels)
         {
-            
+            ClearList();
+
+            for (int i = 0; i < levels.Count; i++)
+            {
+                LevelItemView item = Instantiate<LevelItemView>(_item, _list);
+
+                item.UpdateView(levels[i]);
+
+                item.OnClick += OnLevelClick;
+
+                _items.Add(item);
+            }
         }
 
-        private void OnBackClick()
+        private void OnLevelClick(int id)
         {
-            //ViewManager.Instance.SetView(ViewNames.ChaptersViews);
+            //ViewManager.Instance.SetView(ViewNames.EpisodeOneView, id);
         }
 
-        private void OnPLayClick()
+        protected override void OnDestroy()
         {
-            StartLevelCommand startLevelCommand = new StartLevelCommand(1);
-            startLevelCommand.Execute();
+            for (int i = 0; i < _items.Count; i++)
+            {
+                _items[i].OnClick -= OnLevelClick;
+            }
 
-            CloseView();
+            base.OnDestroy();
+        }
+
+        private void ClearList()
+        {
+            for (int i = _items.Count - 1; i >= 0; i--)
+            {
+                _items[i].OnClick -= OnLevelClick;
+                Destroy(_items[i].gameObject);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using Core.Commands;
 using Core.ViewManager;
 using Game.Data;
 using Game.Factory;
+using Game.Level;
 using Game.Model;
 using Game.Services.Interfaces;
 
@@ -21,15 +22,15 @@ namespace Game.Commands
         public void Execute()
         {
             var loaderService = BindManager.GetInstance<ILevelLoaderService>();
-            loaderService.GetLevel(_levelModel.LevelId, null, OnLevelLoaded);
-        }
+            LevelController level = loaderService.GetLevel(_levelModel.LevelId);
 
-        private void OnLevelLoaded()
-        {
             var factory = BindManager.GetInstance<GameFactory>();
             var player = factory.GetPlayer();
 
             _levelModel.Player = player;
+            _levelModel.Level = level;
+
+            player.Reset(level.StartPosition);
 
             ViewManager.Instance.SetView(ViewNames.GameHudView);
             ViewManager.Instance.SetView(ViewNames.GameView);

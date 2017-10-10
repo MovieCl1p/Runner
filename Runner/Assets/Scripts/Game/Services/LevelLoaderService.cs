@@ -1,4 +1,5 @@
-﻿using Game.Services.Interfaces;
+﻿using Game.Level;
+using Game.Services.Interfaces;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,18 +11,18 @@ namespace Game.Services
         private string _sceneName;
         private Action _callback;
 
-        public GameObject GetLevel(int levelId, Transform parent = null, Action callback = null)
+        public LevelController GetLevel(int levelId, Transform parent = null, Action callback = null)
         {
-            _sceneName = "Level" + levelId;
-            _callback = callback;
-            SceneManager.LoadSceneAsync(_sceneName, LoadSceneMode.Additive);
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            //string levelName = "Level" + (levelId - 1); 
-            //GameObject go = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Levels/" + levelName), parent);
-            //go.transform.localScale = Vector3.one;
-            //go.transform.localPosition = Vector3.zero;
-            //return go;
-            return null;
+            LevelController levelPrefab = Resources.Load<LevelController>("Levels/" + "Level" + levelId);
+            if(levelPrefab == null)
+            {
+                Debug.LogError("There is no level with id: " + levelId);
+                return null;
+            }
+
+            LevelController result = GameObject.Instantiate<LevelController>(levelPrefab);
+
+            return result;
         }
 
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)

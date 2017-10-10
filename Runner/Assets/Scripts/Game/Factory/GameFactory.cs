@@ -12,7 +12,7 @@ namespace Game.Factory
         {
             if (!ResourcesCache.IsResourceLoaded("Player"))
             {
-                ResourcesCache.SetupResourcesCache("Player", "Player");
+                ResourcesCache.SetupResourcesCache("Player", "Game/Player");
             }
 
             var prefab = ResourcesCache.GetObject<PlayerController>("Player", "Player");

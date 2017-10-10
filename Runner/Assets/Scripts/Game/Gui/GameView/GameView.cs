@@ -45,6 +45,8 @@ namespace Game.Gui.GameView
         protected override void OnScheduledUpdate()
         {
             base.OnScheduledUpdate();
+
+            _levelModel.Player.Activate(true);
         }
         
         private void OnPlayerRestart()

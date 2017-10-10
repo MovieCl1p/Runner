@@ -2,6 +2,7 @@
 using Core;
 using Core.Binder;
 using Game.Player.Control;
+using System;
 
 namespace Game.Player
 {
@@ -9,23 +10,21 @@ namespace Game.Player
     {
         [SerializeField]
         private Transform _bot;
-
-        [SerializeField]
-        private Rigidbody _rb;
-
-        [SerializeField]
-        private CharacterController __characterController;
-
+        
         private IPlayerControl _control;
 
         [SerializeField]
         private LayerMask _groundMask;
 
-        private float _maxSpeed = 10f;
-        private float _jumpForce = 700f;
-        private float _jumpUpForce = 2f;
-        private float _jumpDownForce = 8f;
+        private float _horizontalSpeed = 8;
+        private float _verticalSpeed = 0;
 
+        private float _gravity = 0.5f;
+
+        private float _jumpForce = 20;
+        private float _jumpUpSpeed = 0.1f;
+        private float _jumpDownSpeed = 4f;
+        
         private bool _jump;
         private bool _inAir;
         private bool _grounded;
@@ -38,68 +37,87 @@ namespace Game.Player
 
             _control = BindManager.GetInstance<IPlayerControl>();
             _control.OnJumpClick += OnJumpClick;
-
-            ScheduleUpdate(1);
         }
 
-        protected override void OnScheduledUpdate()
+        public void Reset(Vector3 startPosition)
         {
-            _active = true;
-        }
+            CachedTransform.position = startPosition;
+            _verticalSpeed = 0;
+            _jump = false;
+            _inAir = false;
+            _grounded = false;
 
-        private void OnJumpClick()
-        {
-            _jump = true;
+            _active = false;
         }
         
         protected void FixedUpdate()
         {
+            if(!_active)
+            {
+                return;
+            }
+
             _grounded = false;
             
-            Collider[] colliders = Physics.OverlapSphere(_bot.position, 0.2f, _groundMask);
-            for (int i = 0; i < colliders.Length; i++)
+            Ray ray = new Ray(_bot.transform.position, -_bot.transform.up);
+            RaycastHit hit;
+
+            Debug.DrawRay(_bot.transform.position, -_bot.transform.up, Color.red);
+
+            if(Physics.Raycast(ray, out hit, _groundMask))
             {
-                if (colliders[i].gameObject != _bot.gameObject)
+                if (hit.distance < 0.5f)
                 {
                     _grounded = true;
-                    if(_rb.velocity.y < 0)
-                    {
-                        _inAir = false;
-                    }
-                    break;
                 }
+
+                if(_verticalSpeed < 0)
+                {
+                    _inAir = false;
+                }
+                
             }
 
             Move(1, _jump);
             _jump = false;
         }
-        
-        public void Move(float move, bool jump)
+
+        public void Activate(bool v)
         {
-            if (_grounded)
+            _active = v;
+        }
+
+        private void Move(float move, bool jump)
+        {
+            if(_grounded)
             {
-                _rb.velocity = new Vector2(move * _maxSpeed, _rb.velocity.y);   
+                _verticalSpeed = 0;
+            }
+            else
+            {
+                _verticalSpeed -= _gravity;
             }
 
             if (_grounded && jump)
             {
-                _grounded = false;
-                _rb.AddForce(new Vector2(0f, _jumpForce));
+                _verticalSpeed = _jumpForce ;
                 _inAir = true;
             }
-
-            if(_inAir)
+            
+            if (_inAir)
             {
-                float jf = (_control.IsJumpPressed ? _jumpUpForce : _jumpDownForce) * Time.deltaTime * Physics.gravity.y;
-                Vector3 dv = Vector3.up * jf;
-                _rb.velocity += dv;
+                float jf = (_control.IsJumpPressed ? _jumpUpSpeed : _jumpDownSpeed);
+                _verticalSpeed -= jf;
             }
+
+            CachedTransform.Translate(_horizontalSpeed * Time.deltaTime, _verticalSpeed * Time.deltaTime, 0);
+
+            _verticalSpeed -= _gravity;
         }
 
-
-        public void OnTriggerEnter(Collider other)
+        private void OnJumpClick()
         {
-            
+            _jump = true;
         }
     }
 }

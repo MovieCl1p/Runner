@@ -1,7 +1,6 @@
 ﻿using Core.Binder;
 using Core.Commands;
 using Game.Model;
-using UnityEngine;
 
 namespace Game.Commands
 {
@@ -10,8 +9,9 @@ namespace Game.Commands
         public void Execute()
         {
             var levelModel = BindManager.GetInstance<LevelSessionModel>();
+            levelModel.Player.Reset(levelModel.Level.StartPosition);
 
-            levelModel.Player.transform.position = Vector3.zero;
+            levelModel.Player.Activate(true);
         }
     }
 }

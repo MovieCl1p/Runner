@@ -1,4 +1,5 @@
-﻿using Game.Player;
+﻿using Game.Level;
+using Game.Player;
 
 namespace Game.Model
 {
@@ -7,5 +8,7 @@ namespace Game.Model
         public int LevelId { get; set; }
 
         public PlayerController Player { get; set; }
+
+        public LevelController Level { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Game.Components.Triggers
 
         public void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.layer == LayerMask.NameToLayer("RestartLayer"))
+            if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 _dispatcher.Dispatch(LevelEventsEnum.RestartTrigerEntered.ToString());
             }

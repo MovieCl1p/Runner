@@ -7,6 +7,12 @@ namespace Game.Player.Control
 {
     public class PlayerControl : IPlayerControl, IUpdateHandler
     {
+        public event Action OnJumpClick;
+
+        public event Action OnChangeColorClick;
+
+        private bool _jumpPress = false;
+
         public bool IsUpdating { get; set; }
 
         public bool IsRegistered { get; set; }
@@ -18,11 +24,7 @@ namespace Game.Player.Control
                 return _jumpPress;
             }
         }
-
-        public event Action OnJumpClick;
-
-        private bool _jumpPress = false;
-
+        
         public PlayerControl()
         {
             UpdateNotifier.Instance.Register(this);
@@ -40,6 +42,11 @@ namespace Game.Player.Control
             {
                 _jumpPress = false;
             }
+
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                CallChangeColorClick();
+            }
         }
 
         private void CallJumpClick()
@@ -47,6 +54,14 @@ namespace Game.Player.Control
             if(OnJumpClick != null)
             {
                 OnJumpClick();
+            }
+        }
+
+        private void CallChangeColorClick()
+        {
+            if (OnChangeColorClick != null)
+            {
+                OnChangeColorClick();
             }
         }
     }

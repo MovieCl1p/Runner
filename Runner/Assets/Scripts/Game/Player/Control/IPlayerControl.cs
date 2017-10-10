@@ -7,5 +7,7 @@ namespace Game.Player.Control
         bool IsJumpPressed { get; }
 
         event Action OnJumpClick;
+
+        event Action OnChangeColorClick;
     }
 }

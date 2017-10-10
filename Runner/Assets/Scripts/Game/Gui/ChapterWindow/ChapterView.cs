@@ -4,6 +4,10 @@ using UnityEngine.UI;
 using Game.Data;
 using System.Collections.Generic;
 using System;
+using Game.Services.Interfaces;
+using Core.Binder;
+using Game.Config.Levels;
+using Game.Config.Episodes;
 
 namespace Game.Gui.ChapterWindow
 {
@@ -20,24 +24,20 @@ namespace Game.Gui.ChapterWindow
         {
             base.Start();
 
-            List<int> list = new List<int>();
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            list.Add(4);
-            list.Add(5);
-
-            UpdateView(list);
+            var service = BindManager.GetInstance<ILevelService>();
+            var episodes = service.GetEpisodes();
+            
+            UpdateView(episodes);
         }
 
-        public void UpdateView(List<int> levels)
+        public void UpdateView(List<EpisodeConfig> episodes)
         {
             ClearList();
 
-            for (int i = 0; i < levels.Count; i++)
+            for (int i = 0; i < episodes.Count; i++)
             {
                 ChapterItemView item = Instantiate<ChapterItemView>(_item, _list);
-                item.UpdateView(levels[i]);
+                item.UpdateView(episodes[i]);
 
                 item.OnClick += OnEpisodeClick;
 
@@ -45,9 +45,9 @@ namespace Game.Gui.ChapterWindow
             }
         }
         
-        private void OnEpisodeClick(int id)
+        private void OnEpisodeClick(EpisodeConfig config)
         {
-            ViewManager.Instance.SetView(ViewNames.LevelView, id);
+            ViewManager.Instance.SetView(ViewNames.LevelView, config);
         }
 
         protected override void OnDestroy()

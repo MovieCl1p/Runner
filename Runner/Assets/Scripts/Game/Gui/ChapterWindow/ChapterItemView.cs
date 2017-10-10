@@ -2,12 +2,14 @@
 using Core;
 using UnityEngine;
 using UnityEngine.UI;
+using Game.Config.Levels;
+using Game.Config.Episodes;
 
 namespace Game.Gui.ChapterWindow
 {
     public class ChapterItemView : BaseMonoBehaviour
     {
-        public event Action<int> OnClick;
+        public event Action<EpisodeConfig> OnClick;
 
         [SerializeField]
         private Text _levelName;
@@ -15,7 +17,7 @@ namespace Game.Gui.ChapterWindow
         [SerializeField]
         private Button _btn;
 
-        private int _chapterId;
+        private EpisodeConfig _config;
 
         protected override void Start()
         {
@@ -23,17 +25,17 @@ namespace Game.Gui.ChapterWindow
             _btn.onClick.AddListener(OnBtnClick);
         }
         
-        public void UpdateView(int chapterId)
+        public void UpdateView(EpisodeConfig config)
         {
-            _chapterId = chapterId;
-            _levelName.text = "Level " + chapterId;
+            _config = config;
+            _levelName.text = config.EpisodeName;
         }
 
         private void OnBtnClick()
         {
             if (OnClick != null)
             {
-                OnClick(_chapterId);
+                OnClick(_config);
             }
         }
 

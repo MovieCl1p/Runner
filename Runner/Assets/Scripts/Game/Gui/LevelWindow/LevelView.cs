@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using Game.Data;
 using Game.Gui.ChapterWindow;
 using System.Collections.Generic;
+using Game.Config.Episodes;
+using Game.Config.Levels;
 
 namespace Game.Gui.LevelWindow
 {
@@ -23,17 +25,12 @@ namespace Game.Gui.LevelWindow
         {
             base.Start();
 
-            List<int> list = new List<int>();
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            list.Add(4);
-            list.Add(5);
-
-            UpdateView(list);
+            EpisodeConfig config = (EpisodeConfig) Options;
+            
+            UpdateView(config.Levels);
         }
 
-        public void UpdateView(List<int> levels)
+        public void UpdateView(List<LevelConfig> levels)
         {
             ClearList();
 
@@ -49,9 +46,12 @@ namespace Game.Gui.LevelWindow
             }
         }
 
-        private void OnLevelClick(int id)
+        private void OnLevelClick(LevelConfig config)
         {
-            //ViewManager.Instance.SetView(ViewNames.EpisodeOneView, id);
+            CloseView();
+
+            StartLevelCommand command = new StartLevelCommand(config.LevelId);
+            command.Execute();
         }
 
         protected override void OnDestroy()

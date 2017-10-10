@@ -36,6 +36,7 @@ namespace Game.Config
         private void BindServices()
         {
             BindManager.Bind<ILevelLoaderService>().To<LevelLoaderService>().ToSingleton();
+            BindManager.Bind<ILevelService>().To<LevelService>().ToSingleton();
         }
     }
 }

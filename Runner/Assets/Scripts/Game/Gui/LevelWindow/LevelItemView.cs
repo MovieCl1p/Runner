@@ -1,4 +1,5 @@
 ﻿using Core;
+using Game.Config.Levels;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ namespace Game.Gui.LevelWindow
 {
     public class LevelItemView : BaseMonoBehaviour
     {
-        public event Action<int> OnClick;
+        public event Action<LevelConfig> OnClick;
 
         [SerializeField]
         private Text _levelName;
@@ -15,7 +16,7 @@ namespace Game.Gui.LevelWindow
         [SerializeField]
         private Button _btn;
 
-        private int _LevelId;
+        private LevelConfig _config;
 
         protected override void Start()
         {
@@ -23,17 +24,17 @@ namespace Game.Gui.LevelWindow
             _btn.onClick.AddListener(OnBtnClick);
         }
 
-        public void UpdateView(int levelId)
+        public void UpdateView(LevelConfig config)
         {
-            _LevelId = levelId;
-            _levelName.text = "Level " + levelId;
+            _config = config;
+            _levelName.text = config.LevelName;
         }
 
         private void OnBtnClick()
         {
             if (OnClick != null)
             {
-                OnClick(_LevelId);
+                OnClick(_config);
             }
         }
 

@@ -995,6 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startPosition: {fileID: 4924202525109780}
+  _renderers: []
 --- !u!114 &114509600669826470
 MonoBehaviour:
   m_ObjectHideFlags: 1

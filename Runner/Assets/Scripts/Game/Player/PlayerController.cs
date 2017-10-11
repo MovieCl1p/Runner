@@ -54,7 +54,7 @@ namespace Game.Player
 
             _dispatcher = BindManager.GetInstance<IDispatcher>();
 
-            _colorChecker = new ColorChecker();
+            _colorChecker = new ColorChecker(CachedTransform);
         }
         
         public void Reset(Vector3 startPosition)
@@ -98,7 +98,7 @@ namespace Game.Player
                     _grounded = true;
                     _inAir = false;
                     _canDoubleJump = true;
-                    CheckColor(hit.transform.gameObject.layer);
+                    CheckColor(hit.transform);
                 }
                 else
                 {
@@ -171,15 +171,15 @@ namespace Game.Player
             _view.ChangeColor(_currentColorK);
         }
 
-        private void CheckColor(int layer)
+        private void CheckColor(Transform platform)
         {
-            var result = _colorChecker.CheckColor(_currentColor, layer);
+            var result = _colorChecker.CheckColor(_currentColor, platform);
             if(!result)
             {
                 _dispatcher.Dispatch(LevelEventsEnum.RestartTrigerEntered.ToString());
                 return;
             }
-
+            
 
         }
 

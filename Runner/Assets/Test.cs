@@ -21,6 +21,6 @@ public class Test : MonoBehaviour
 
         Vector3 playerLocalPosition = _platform.InverseTransformPoint(_player.position);
         
-        Debug.Log(playerLocalPosition.x);
+        //Debug.Log(playerLocalPosition.x);
     }
 }

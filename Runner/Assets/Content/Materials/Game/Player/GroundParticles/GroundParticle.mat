@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Wireframe
-  m_Shader: {fileID: 4800000, guid: f85d4d6b987860148ad99d81abf73b5e, type: 3}
+  m_Name: GroundParticle
+  m_Shader: {fileID: 4800000, guid: 493b5fe6a7692c84ea2b8187a2b7057d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -59,13 +59,10 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Fade: 2.53
-    - _Fresnel: 5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LineBrightness: 0.52
-    - _LineThickness: 1.35
+    - _InvFade: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -74,8 +71,10 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WobbleSpeed: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.3104365, g: 0.2580558, b: 0.9485294, a: 1}
+    - _Color: {r: 0.47058827, g: 0.13725491, b: 0.21960786, a: 1}
+    - _EmisColor: {r: 0.47058827, g: 0.13725491, b: 0.21960786, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainColor: {r: 0.47058827, g: 0.13725491, b: 0.21960786, a: 1}
+    - _TintColor: {r: 0.4039216, g: 0.19215688, b: 0.27450982, a: 1}

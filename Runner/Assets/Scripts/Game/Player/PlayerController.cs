@@ -20,20 +20,22 @@ namespace Game.Player
         [SerializeField]
         private PlayerView _view;
 
-        private float _horizontalSpeed = 8;
+        private float _horizontalSpeed = 25;
         private float _verticalSpeed = 0;
 
         private float _gravity = 0.5f;
 
         private float _jumpForce = 20;
-        private float _jumpUpSpeed = 0.1f;
-        private float _jumpDownSpeed = 0.5f;
+        private float _jumpUpSpeed = 0.2f;
+        private float _jumpDownSpeed = 0.6f;
         
         private bool _jump;
         private bool _inAir;
         private bool _grounded;
         private bool _doubleJump;
         private bool _canDoubleJump;
+
+        private bool _wasJumping;
 
         private bool _active = true;
 
@@ -99,6 +101,13 @@ namespace Game.Player
                     _inAir = false;
                     _canDoubleJump = true;
                     CheckColor(hit.transform);
+                    
+                    if(_wasJumping)
+                    {
+                        _view.EmitTrail(true);
+                        //CreateParticles(maxDist);
+                        _wasJumping = false;
+                    }
                 }
                 else
                 {
@@ -131,6 +140,7 @@ namespace Game.Player
             {
                 _verticalSpeed = _jumpForce ;
                 _inAir = true;
+                _wasJumping = true;
             }
             
             if(_inAir && _doubleJump)
@@ -142,6 +152,8 @@ namespace Game.Player
             {
                 float jf = (_control.IsJumpPressed ? _jumpUpSpeed : _jumpDownSpeed);
                 _verticalSpeed -= jf;
+
+                _view.EmitTrailInAir(_control.IsJumpPressed);
             }
 
             CachedTransform.Translate(_horizontalSpeed * Time.deltaTime, _verticalSpeed * Time.deltaTime, 0);
@@ -179,8 +191,11 @@ namespace Game.Player
                 _dispatcher.Dispatch(LevelEventsEnum.RestartTrigerEntered.ToString());
                 return;
             }
-            
+        }
 
+        private void CreateParticles(float maxDist)
+        {
+            _view.EmitParticles(maxDist);
         }
 
         protected override void OnReleaseResources()

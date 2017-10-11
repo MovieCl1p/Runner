@@ -1,6 +1,7 @@
 ﻿using Core;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Game.Player
 {
@@ -8,6 +9,9 @@ namespace Game.Player
     {
         [SerializeField]
         private List<Renderer> _renderers;
+
+        [SerializeField]
+        private ParticleSystem _groundParticles;
 
         [SerializeField]
         private ParticleSystem _firstParticle;
@@ -20,8 +24,9 @@ namespace Game.Player
 
         [SerializeField]
         private Color _secondColor;
-        
-        
+
+        private ParticleSystem _activeTrail;
+
         private int _colorPropertyId;
         
         protected override void Start()
@@ -42,17 +47,54 @@ namespace Game.Player
             {
                 _renderers[i].sharedMaterial.color = color;
             }
+
+            SwitchTrail(first);
+
             
-            if (first)
+        }
+
+        public void EmitParticles(float maxDist)
+        {
+            _groundParticles.Emit(4);
+        }
+
+        public void EmitTrail(bool active)
+        {
+            Debug.Log(active);
+
+            if(_activeTrail != null)
             {
-                _firstParticle.Play();
-                _secondParticle.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+                if(active)
+                {
+                    _activeTrail.Play();
+                }
+                else
+                {
+                    _activeTrail.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+                }
             }
-            else
+        }
+
+        private bool _lastAirActive = false;
+
+        public void EmitTrailInAir(bool active)
+        {
+            if(_lastAirActive != active)
             {
-                _secondParticle.Play();
-                _firstParticle.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+                EmitTrail(active);
+                _lastAirActive = active;
             }
+        }
+
+
+        private void SwitchTrail(bool first)
+        {
+            if (_activeTrail != null)
+            {
+                _activeTrail.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+            }
+
+            _activeTrail = first ? _firstParticle : _secondParticle;
         }
     }
 }

@@ -13,7 +13,8 @@ Shader "Custom/Wireframe" {
         _Fresnel ("Fresnel", Range(0, 5)) = 3.4
         _Color ("Color", Color) = (0.03921569,0.3686275,0.6039216,1)
         _WobbleSpeed ("WobbleSpeed", Range(0, 10)) = 1
-        _Fade ("Fade", Range(-1.5, 1.5)) = 0
+        //_Fade ("Fade", Range(-1.5, 1.5)) = 0
+        _Fade ("Fade", Range(0, 4)) = 0
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
     }
     SubShader {
@@ -72,15 +73,15 @@ Shader "Custom/Wireframe" {
                 i.normalDir = normalize(i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
                 float3 normalDirection = i.normalDir;
-                //clip((sin((((_Fade*1.5+-2.0)+(1.0*i.vertexColor.a))*_WobbleSpeed))*0.5+0.5) - 0.5);
-                clip((sin(((_Fade * 2 + 1.5) + i.vertexColor.a) ) * 0.5 + 0.5) - 0.5);
+                clip((sin((((_Fade*1.5+-2.0)+(1.0*i.vertexColor.a))*_WobbleSpeed))*0.5+0.5) - 0.5);
+                //clip((sin(((_Fade * 2 + 1.5) + i.vertexColor.a) ) * 0.5 + 0.5) - 0.5);
 ////// Lighting:
-                //float node_1059 = 0.0;
-                //float3 node_6246 = smoothstep( float3(node_1059, node_1059, node_1059), ((abs(ddx(i.vertexColor.rgb)) + abs(ddy(i.vertexColor.rgb)))*_LineThickness), i.vertexColor.rgb ).rgb;
-                //float3 finalColor = ((_Color.rgb*(pow(1.0-max(0,dot(normalDirection, viewDirection)),_Fresnel)+((1.0 - min(min(node_6246.r,node_6246.g),node_6246.b))*_LineBrightness)))*_Color.a);
-                //return fixed4(finalColor,1);
+                float node_1059 = 0.0;
+                float3 node_6246 = smoothstep( float3(node_1059, node_1059, node_1059), ((abs(ddx(i.vertexColor.rgb)) + abs(ddy(i.vertexColor.rgb)))*_LineThickness), i.vertexColor.rgb ).rgb;
+                float3 finalColor = ((_Color.rgb*(pow(1.0-max(0,dot(normalDirection, viewDirection)),_Fresnel)+((1.0 - min(min(node_6246.r,node_6246.g),node_6246.b))*_LineBrightness)))*_Color.a);
+                return fixed4(finalColor,1);
 
-                return _Color;// * ( pow(1.0 - max(0, dot(normalDirection, viewDirection)), _Fresnel) );
+                //return _Color;// * ( pow(1.0 - max(0, dot(normalDirection, viewDirection)), _Fresnel) );
             }
             ENDCG
         }

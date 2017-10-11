@@ -19,7 +19,7 @@ namespace Game.Player
         public bool CheckColor(int playerColor, Transform platform)
         {
             int colliderLayer = platform.gameObject.layer;
-            ChangePlatformColor(platform);
+            //ChangePlatformColor(platform);
 
             if (colliderLayer == _levelColorRestart)
             {
@@ -38,27 +38,14 @@ namespace Game.Player
         {
             if (_lastPlatform != platform)
             {
-                //if (_lastPlatform != null)
-                //{
-                    
-                //}
-
                 _lastPlatform = platform;
-                //Renderer platformRenderer = _lastPlatform.GetComponent<Renderer>();
-                //platformRenderer.material.color = Color.blue;
             }
 
             if (_lastPlatform != null)
             {
                 Renderer platformRenderer = _lastPlatform.GetComponent<Renderer>();
-
                 Vector3 playerLocalPosition = platform.InverseTransformPoint(_player.position);
-                Debug.Log(playerLocalPosition.z);
-
-                platformRenderer.material.SetFloat("_Fade", playerLocalPosition.z);
-
-                float dx = platformRenderer.bounds.size.x / 2;
-
+                platformRenderer.material.SetFloat("_Fade", 2.5f);
             }
         }
     }

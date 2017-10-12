@@ -3,6 +3,8 @@ namespace Game.Events
 {
     public enum LevelEventsEnum : int
     {
-        RestartTrigerEntered
+        Restart,
+        Finish,
+        Start
     }
 }

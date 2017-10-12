@@ -60,8 +60,6 @@ namespace Game.Player
 
         public void EmitTrail(bool active)
         {
-            Debug.Log(active);
-
             if(_activeTrail != null)
             {
                 if(active)

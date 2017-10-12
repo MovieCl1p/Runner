@@ -13,10 +13,11 @@ namespace Game.Commands
     {
         private LevelSessionModel _levelModel;
 
-        public StartLevelCommand(int levelId)
+        public StartLevelCommand(int episodeId, int levelId)
         {
             _levelModel = BindManager.GetInstance<LevelSessionModel>();
             _levelModel.LevelId = levelId;
+            _levelModel.EpisodeId = episodeId;
         }
 
         public void Execute()

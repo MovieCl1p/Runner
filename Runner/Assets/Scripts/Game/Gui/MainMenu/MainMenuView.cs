@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Game.Data;
-using Game.Commands;
 
 namespace Game.Gui.MainMenu
 {
@@ -20,13 +19,10 @@ namespace Game.Gui.MainMenu
             OptionsBtn.onClick.AddListener(OnOptionsClick);
             MapsView.onClick.AddListener(OnChaptersViewsClick);
         }
-
+        
         private void OnPLayClick()
         {
-            StartLevelCommand startLevelCommand = new StartLevelCommand(1);
-            startLevelCommand.Execute();
-
-            CloseView();
+            ViewManager.Instance.SetView(ViewNames.ChapterView);
         }
 
         private void OnOptionsClick()

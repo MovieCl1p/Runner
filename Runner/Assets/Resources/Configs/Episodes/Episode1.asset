@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27acda6a808a0104a891f44f84c1560d, type: 3}
   m_Name: Episode1
   m_EditorClassIdentifier: UnityEngine:UnityEngine:ScriptableObject
+  EpisodeId: 1
   EpisodeName: Episode 1
   Levels:
   - {fileID: 11400000, guid: 94ed7e646cf285646b6ed4f0d8b6ca55, type: 2}

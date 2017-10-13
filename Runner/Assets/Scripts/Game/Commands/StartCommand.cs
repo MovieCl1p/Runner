@@ -21,7 +21,7 @@ namespace Game.Commands
             ViewManager.Instance.RegisterView(ViewNames.GameHudView, LayerNames.ScreenLayer);
 
             ViewManager.Instance.RegisterView(ViewNames.OptionsView, LayerNames.WindowLayer);
-            ViewManager.Instance.RegisterView(ViewNames.ChapterView, LayerNames.WindowLayer);
+            ViewManager.Instance.RegisterView(ViewNames.EpisodeView, LayerNames.WindowLayer);
             ViewManager.Instance.RegisterView(ViewNames.LevelView, LayerNames.WindowLayer);
 
             ViewManager.Instance.RegisterView(ViewNames.GameView, LayerNames.ThreeDLayer);

@@ -32,6 +32,32 @@ namespace Game.Services
             return _episodes;
         }
 
+        public EpisodeConfig GetEpisode(int episodeId)
+        {
+            for (int i = 0; i < _episodes.Count; i++)
+            {
+                if (_episodes[i].EpisodeId == episodeId)
+                {
+                    return _episodes[i];
+                }
+            }
+
+            return null;
+        }
+
+        public LevelConfig GetLevel(int levelId)
+        {
+            for (int i = 0; i < _levels.Count; i++)
+            {
+                if (_levels[i].LevelId == levelId)
+                {
+                    return _levels[i];
+                }
+            }
+
+            return null;
+        }
+
         private void LoadEpisodes()
         {
             var episodes = Resources.LoadAll<EpisodeConfig>("Configs/Episodes/");

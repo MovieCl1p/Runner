@@ -8,6 +8,8 @@ using Game.Gui.ChapterWindow;
 using System.Collections.Generic;
 using Game.Config.Episodes;
 using Game.Config.Levels;
+using Game.Services.Interfaces;
+using Core.Binder;
 
 namespace Game.Gui.LevelWindow
 {
@@ -21,13 +23,18 @@ namespace Game.Gui.LevelWindow
 
         private List<LevelItemView> _items = new List<LevelItemView>();
 
+        private EpisodeConfig _episodeConfig;
+
         protected override void Start()
         {
             base.Start();
 
-            EpisodeConfig config = (EpisodeConfig) Options;
+            int episodeId = (int) Options;
+            ILevelService service = BindManager.GetInstance<ILevelService>();
+
+            _episodeConfig = service.GetEpisode(episodeId);
             
-            UpdateView(config.Levels);
+            UpdateView(_episodeConfig.Levels);
         }
 
         public void UpdateView(List<LevelConfig> levels)
@@ -50,7 +57,7 @@ namespace Game.Gui.LevelWindow
         {
             CloseView();
 
-            StartLevelCommand command = new StartLevelCommand(config.LevelId);
+            StartLevelCommand command = new StartLevelCommand(_episodeConfig.EpisodeId, config.LevelId);
             command.Execute();
         }
 

@@ -47,7 +47,7 @@ namespace Game.Gui.ChapterWindow
         
         private void OnEpisodeClick(EpisodeConfig config)
         {
-            ViewManager.Instance.SetView(ViewNames.LevelView, config);
+            ViewManager.Instance.SetView(ViewNames.LevelView, config.EpisodeId);
         }
 
         protected override void OnDestroy()

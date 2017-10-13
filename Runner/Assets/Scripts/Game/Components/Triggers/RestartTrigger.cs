@@ -21,7 +21,7 @@ namespace Game.Components.Triggers
         {
             if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                _dispatcher.Dispatch(LevelEventsEnum.RestartTrigerEntered.ToString());
+                _dispatcher.Dispatch(LevelEventsEnum.Restart);
             }
         }
     }

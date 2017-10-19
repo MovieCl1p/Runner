@@ -10,18 +10,27 @@ namespace Game.Gui.OptionsView
 {
     public class OptionsView : BaseView
     {
-        [SerializeField] private Button BackBtn;
+        [SerializeField] private Button _backBtn;
+
+        [SerializeField] private Slider _soundVolume;
+
+        [SerializeField] private AudioSource _audioSource;
 
         protected override void Start()
         {
             base.Start();
 
-            BackBtn.onClick.AddListener(OnMainMenuClick);
+            _backBtn.onClick.AddListener(OnMainMenuClick);
         }
 
         private void OnMainMenuClick()
         {
             ViewManager.Instance.SetView(ViewNames.MainMenuScreen);
+        }
+
+        private void Update()
+        {
+            _audioSource.volume = _soundVolume.value;
         }
     }
 }

@@ -12,5 +12,7 @@ namespace Game.Model
         public PlayerController Player { get; set; }
 
         public LevelController Level { get; set; }
+
+        public float LevelTime { get; set; }
     }
 }

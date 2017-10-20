@@ -16,11 +16,12 @@ namespace Game.Gui.GameView
 {
     public class GameView : BaseView
     {
-        [SerializeField]
-        private Transform _levelHolder;
+        public float _time = 0;
+        
 
-        [SerializeField]
-        private CameraSmoothFollow _camera;
+        [SerializeField] private Transform _levelHolder;
+
+        [SerializeField] private CameraSmoothFollow _camera;
 
         private IDispatcher _dispatcher;
 
@@ -44,12 +45,25 @@ namespace Game.Gui.GameView
             ScheduleUpdate(1, false);
         }
 
+        protected override void Update()
+        {
+            base.Update();
+
+            _time += Time.deltaTime;
+            
+        }
+
         private void OnFinishLevel()
         {
-            ViewManager.Instance.SetView(ViewNames.MainMenuScreen);
-            ViewManager.Instance.SetView(ViewNames.LevelView, _levelModel.EpisodeId);
-            
-            ViewManager.Instance.GetLayerById(LayerNames.ThreeDLayer).RemoveCurrentView();
+            _levelModel.LevelTime = _time;
+            //ViewManager.Instance.SetView(ViewNames.LevelView, _levelModel.EpisodeId);
+
+            ViewManager.Instance.SetView(ViewNames.FinishItemView);
+
+            //ViewManager.Instance.SetView(ViewNames.MainMenuScreen);
+            //ViewManager.Instance.SetView(ViewNames.LevelView, _levelModel.EpisodeId);
+            //ViewManager.Instance.GetLayerById(LayerNames.ThreeDLayer).RemoveCurrentView();
+            //_levelModel.LevelTime = _time;
         }
 
         protected override void OnScheduledUpdate()
@@ -64,6 +78,8 @@ namespace Game.Gui.GameView
         {
             _restartLevelCommand = new RestartLevelCommand();
             _restartLevelCommand.Execute();
+
+            _time = 0;
         }
 
         protected override void OnReleaseResources()

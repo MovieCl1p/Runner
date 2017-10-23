@@ -1,7 +1,5 @@
 ﻿using Core;
 using Game.Config.Levels;
-using Game.Gui.GameView;
-using Game.Model;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,32 +12,17 @@ namespace Game.Gui.LevelWindow
 
         [SerializeField] private Text _levelName;
         
-        [SerializeField] private Button _btn;
-
         [SerializeField] private Button _playBtn;
-
-        [SerializeField] private Button _restartBtn;
 
         private LevelConfig _config;
 
         protected override void Start()
         {
             base.Start();
-            _btn.onClick.AddListener(OnBtnClick);
 
             _playBtn.onClick.AddListener(OnPlayClick);
-
-            _restartBtn.onClick.AddListener(OnRestartClick);
         }
-
-        private void OnRestartClick()
-        {
-            if (OnClick != null)
-            {
-                OnClick(_config);
-            }
-        }
-
+        
         private void OnPlayClick()
         {
             if (OnClick != null)
@@ -52,22 +35,10 @@ namespace Game.Gui.LevelWindow
         {
             _config = config;
             _levelName.text = config.LevelName;
-
-            
         }
-
-        private void OnBtnClick()
-        {
-            if (OnClick != null)
-            {
-                OnClick(_config);
-            }
-        }
-
+        
         protected override void OnDestroy()
         {
-            _btn.onClick.RemoveListener(OnBtnClick);
-
             _playBtn.onClick.RemoveListener(OnPlayClick);
 
             base.OnDestroy();

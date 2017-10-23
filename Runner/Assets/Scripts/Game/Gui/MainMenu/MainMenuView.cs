@@ -9,9 +9,6 @@ namespace Game.Gui.MainMenu
     {
         [SerializeField]private Button PlayBtn;
         [SerializeField]private Button OptionsBtn;
-        [SerializeField]private Button MapsView;
-        [SerializeField]private Button VideoBtn;
-        [SerializeField]private Button LiderBtn;
 
         protected override void Start()
         {
@@ -19,19 +16,6 @@ namespace Game.Gui.MainMenu
 
             PlayBtn.onClick.AddListener(OnPLayClick);
             OptionsBtn.onClick.AddListener(OnOptionsClick);
-            MapsView.onClick.AddListener(OnChaptersViewsClick);
-            VideoBtn.onClick.AddListener(OnVideoViewClick);
-            LiderBtn.onClick.AddListener(OnLiderBoardsViewClick);
-        }
-
-        private void OnLiderBoardsViewClick()
-        {
-            
-        }
-
-        private void OnVideoViewClick()
-        {
-           
         }
         
         private void OnPLayClick()
@@ -42,13 +26,6 @@ namespace Game.Gui.MainMenu
         private void OnOptionsClick()
         {
             ViewManager.Instance.SetView(ViewNames.OptionsView);
-            
         }
-
-        private void OnChaptersViewsClick()
-        {
-            ViewManager.Instance.SetView(ViewNames.EpisodeView);
-        }
-        
     }
 }

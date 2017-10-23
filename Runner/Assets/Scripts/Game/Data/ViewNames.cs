@@ -12,7 +12,7 @@ namespace Game.Data
         public const string OptionsView = "OptionsView";
         public const string EpisodeView = "EpisodeView";
         public const string LevelView = "LevelView";
-        public const string FinishItemView = "FinishItemView";
+        public const string FinishView = "FinishView";
 
         public const string LoaderWindow = "LoaderWindow";
     }

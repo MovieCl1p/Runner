@@ -11,6 +11,7 @@ using Game.Model;
 using Core.Commands;
 using Game.Commands;
 using Game.Data;
+using UnityEngine.SceneManagement;
 
 namespace Game.Gui.GameView
 {
@@ -28,6 +29,8 @@ namespace Game.Gui.GameView
         private LevelSessionModel _levelModel;
 
         private ICommand _restartLevelCommand;
+
+        private bool _paused;
 
         protected override void Start()
         {
@@ -57,14 +60,20 @@ namespace Game.Gui.GameView
         {
             _levelModel.LevelTime = _time;
             //ViewManager.Instance.SetView(ViewNames.LevelView, _levelModel.EpisodeId);
+            
+            if (!_paused)
+            {
+                ViewManager.Instance.SetView(ViewNames.FinishView);
+                Time.timeScale = 0;
+                _paused = true;
 
-            ViewManager.Instance.SetView(ViewNames.FinishItemView);
+            }
 
-            //ViewManager.Instance.SetView(ViewNames.MainMenuScreen);
-            //ViewManager.Instance.SetView(ViewNames.LevelView, _levelModel.EpisodeId);
-            //ViewManager.Instance.GetLayerById(LayerNames.ThreeDLayer).RemoveCurrentView();
-            //_levelModel.LevelTime = _time;
-        }
+                //ViewManager.Instance.SetView(ViewNames.MainMenuScreen);
+                //ViewManager.Instance.SetView(ViewNames.LevelView, _levelModel.EpisodeId);
+                //ViewManager.Instance.GetLayerById(LayerNames.ThreeDLayer).RemoveCurrentView();
+                //_levelModel.LevelTime = _time;
+            }
 
         protected override void OnScheduledUpdate()
         {

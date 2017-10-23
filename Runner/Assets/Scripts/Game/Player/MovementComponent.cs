@@ -191,7 +191,7 @@ namespace Game.Player
                 _grounded = true;
                 _inAir = false;
                 _canDoubleJump = true;
-                _player.CheckColor(other.transform);
+                
                 if (_wasJumping)
                 {
                     _player.EmitTrail(true);
@@ -200,6 +200,8 @@ namespace Game.Player
 
                 var pos = other.ClosestPoint(_raycastTransform.position);
                 _player.CachedTransform.position = pos;
+
+                _player.CheckColor(other.transform);
             }
         }
 

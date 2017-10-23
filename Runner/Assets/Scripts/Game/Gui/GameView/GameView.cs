@@ -35,8 +35,8 @@ namespace Game.Gui.GameView
             base.Start();
 
             _dispatcher = BindManager.GetInstance<IDispatcher>();
-            _dispatcher.AddListener(LevelEventsEnum.Restart, OnPlayerRestart);
-            _dispatcher.AddListener(LevelEventsEnum.Finish, OnFinishLevel);
+            _dispatcher.AddListener(LevelEventsEnum.Restart, OnLevelRestart);
+            _dispatcher.AddListener(LevelEventsEnum.Finish, OnLevelFinish);
 
             _levelModel = BindManager.GetInstance<LevelSessionModel>();
             
@@ -44,7 +44,6 @@ namespace Game.Gui.GameView
 
             _restartLevelCommand = new RestartLevelCommand(_camera.CachedTransform);
             _restartLevelCommand.Execute();
-
         }
 
         protected override void Update()
@@ -54,14 +53,14 @@ namespace Game.Gui.GameView
             _time += Time.deltaTime;
         }
 
-        private void OnFinishLevel()
+        private void OnLevelFinish()
         {
             _levelModel.LevelTime = _time;
             
             ViewManager.Instance.SetView(ViewNames.FinishView);
         }
         
-        private void OnPlayerRestart()
+        private void OnLevelRestart()
         {
             _restartLevelCommand.Execute();
         }
@@ -70,8 +69,8 @@ namespace Game.Gui.GameView
         {
             base.OnReleaseResources();
 
-            _dispatcher.RemoveListener(LevelEventsEnum.Restart, OnPlayerRestart);
-            _dispatcher.RemoveListener(LevelEventsEnum.Finish, OnFinishLevel);
+            _dispatcher.RemoveListener(LevelEventsEnum.Restart, OnLevelRestart);
+            _dispatcher.RemoveListener(LevelEventsEnum.Finish, OnLevelFinish);
 
             Destroy(_levelModel.Level.gameObject);
             Destroy(_levelModel.Player.gameObject);

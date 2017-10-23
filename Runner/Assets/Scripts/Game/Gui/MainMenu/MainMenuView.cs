@@ -36,7 +36,7 @@ namespace Game.Gui.MainMenu
         
         private void OnPLayClick()
         {
-            ViewManager.Instance.SetView(ViewNames.ChapterView);
+            ViewManager.Instance.SetView(ViewNames.EpisodeView);
         }
 
         private void OnOptionsClick()
@@ -47,7 +47,7 @@ namespace Game.Gui.MainMenu
 
         private void OnChaptersViewsClick()
         {
-            ViewManager.Instance.SetView(ViewNames.ChapterView);
+            ViewManager.Instance.SetView(ViewNames.EpisodeView);
         }
         
     }

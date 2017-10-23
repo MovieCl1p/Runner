@@ -10,9 +10,11 @@ namespace Game.Data
         public const string GameView = "GameView";
 
         public const string OptionsView = "OptionsView";
-        public const string ChapterView = "ChapterView";
+        public const string EpisodeView = "EpisodeView";
         public const string LevelView = "LevelView";
-        
+        public const string FinishView = "FinishView";
+        public const string PauseView = "PauseView";
+
         public const string LoaderWindow = "LoaderWindow";
     }
 }

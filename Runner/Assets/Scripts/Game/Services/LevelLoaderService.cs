@@ -1,4 +1,5 @@
-﻿using Game.Components.Level;
+﻿using Core.Binder;
+using Game.Components.Level;
 using Game.Services.Interfaces;
 using System;
 using UnityEngine;
@@ -11,16 +12,26 @@ namespace Game.Services
         private string _sceneName;
         private Action _callback;
 
-        public LevelController GetLevel(int levelId, Transform parent = null, Action callback = null)
+        public LevelController GetLevel(int episodeId, int levelId)
         {
-            LevelController levelPrefab = Resources.Load<LevelController>("Levels/" + "Level" + levelId);
-            if(levelPrefab == null)
+            var service = BindManager.GetInstance<ILevelService>();
+            var episode = service.GetEpisode(episodeId);
+            if(episode == null)
+            {
+                Debug.LogError("There is no episode with id: " + episodeId);
+                return null;
+            }
+
+            var level = episode.GetLevel(levelId);
+
+            if(level.LevelPrefab == null)
             {
                 Debug.LogError("There is no level with id: " + levelId);
                 return null;
             }
 
-            LevelController result = GameObject.Instantiate<LevelController>(levelPrefab);
+            GameObject levelGo = GameObject.Instantiate(level.LevelPrefab);
+            LevelController result = levelGo.GetComponent<LevelController>();
 
             return result;
         }

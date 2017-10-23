@@ -23,16 +23,14 @@ namespace Game.Commands
         public void Execute()
         {
             var loaderService = BindManager.GetInstance<ILevelLoaderService>();
-            LevelController level = loaderService.GetLevel(_levelModel.LevelId);
+            LevelController level = loaderService.GetLevel(_levelModel.EpisodeId, _levelModel.LevelId);
 
             var factory = BindManager.GetInstance<GameFactory>();
             var player = factory.GetPlayer();
 
             _levelModel.Player = player;
             _levelModel.Level = level;
-
-            player.Reset(level.StartPosition);
-
+            
             ViewManager.Instance.SetView(ViewNames.GameHudView);
             ViewManager.Instance.SetView(ViewNames.GameView);
         }

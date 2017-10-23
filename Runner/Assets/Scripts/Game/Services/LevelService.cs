@@ -11,17 +11,7 @@ namespace Game.Services
     {
         private List<LevelConfig> _levels;
         private List<EpisodeConfig> _episodes;
-
-        public List<LevelConfig> GetLevels()
-        {
-            if (_levels == null)
-            {
-                LoadLevels();
-            }
-
-            return _levels;
-        }
-
+        
         public List<EpisodeConfig> GetEpisodes()
         {
             if (_episodes == null)
@@ -44,20 +34,7 @@ namespace Game.Services
 
             return null;
         }
-
-        public LevelConfig GetLevel(int levelId)
-        {
-            for (int i = 0; i < _levels.Count; i++)
-            {
-                if (_levels[i].LevelId == levelId)
-                {
-                    return _levels[i];
-                }
-            }
-
-            return null;
-        }
-
+        
         private void LoadEpisodes()
         {
             var episodes = Resources.LoadAll<EpisodeConfig>("Configs/Episodes/");
@@ -68,18 +45,6 @@ namespace Game.Services
             }
 
             _episodes = new List<EpisodeConfig>(episodes);
-        }
-
-        private void LoadLevels()
-        {
-            var levels = Resources.LoadAll<LevelConfig>("Configs/Levels/");
-            if (levels == null || levels.Length == 0)
-            {
-                Debug.LogError("There is no configs for levels");
-                return;
-            }
-
-            _levels = new List<LevelConfig>(levels);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Game.Gui.LevelWindow
             _backButton.onClick.AddListener(OnBackClick);
 
             _levelModel = BindManager.GetInstance<LevelSessionModel>();
-
+            
             _levelTime.text = _levelModel.LevelTime.ToString();
         }
 

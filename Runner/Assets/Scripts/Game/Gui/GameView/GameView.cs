@@ -44,6 +44,7 @@ namespace Game.Gui.GameView
 
             _restartLevelCommand = new RestartLevelCommand(_camera.CachedTransform);
             _restartLevelCommand.Execute();
+
         }
 
         protected override void Update()

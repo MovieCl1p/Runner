@@ -17,7 +17,7 @@ namespace Game.Gui.GameView
 {
     public class GameView : BaseView
     {
-        public float _time = 0;
+        private float _time = 0;
         
 
         [SerializeField] private Transform _levelHolder;
@@ -64,7 +64,9 @@ namespace Game.Gui.GameView
             if (!_paused)
             {
                 ViewManager.Instance.SetView(ViewNames.FinishView);
+
                 Time.timeScale = 0;
+
                 _paused = true;
 
             }

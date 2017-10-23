@@ -24,6 +24,7 @@ namespace Game.Commands
             ViewManager.Instance.RegisterView(ViewNames.EpisodeView, LayerNames.WindowLayer); 
             ViewManager.Instance.RegisterView(ViewNames.LevelView, LayerNames.WindowLayer);
             ViewManager.Instance.RegisterView(ViewNames.FinishView, LayerNames.WindowLayer);
+            ViewManager.Instance.RegisterView(ViewNames.PauseView, LayerNames.WindowLayer);
 
             ViewManager.Instance.RegisterView(ViewNames.GameView, LayerNames.ThreeDLayer);
         }

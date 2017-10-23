@@ -1,23 +1,19 @@
-﻿using System;
-using Core;
-using Core.Binder;
+﻿using Core.Binder;
 using Core.ViewManager;
+using Game.Data;
 using Game.Model;
 using UnityEngine;
 using UnityEngine.UI;
-using Game.Data;
 
 namespace Game.Gui.LevelWindow
 {
-    public class FinishView : BaseView
+    class PauseView : BaseView
     {
-        [SerializeField] private Text _levelTime;
+        [SerializeField] private LevelSessionModel _levelModel;
 
         [SerializeField] private Button _backButton;
 
-        private LevelSessionModel _levelModel;
-
-        private GameView.GameView _gameView;
+        [SerializeField] private Text _levelTime;
 
         protected override void Start()
         {
@@ -33,11 +29,8 @@ namespace Game.Gui.LevelWindow
         private void OnBackClick()
         {
             Time.timeScale = 1;
+            CloseView();
 
-            ViewManager.Instance.SetView(ViewNames.LevelView, _levelModel.EpisodeId);
-
-            ViewManager.Instance.GetLayerById(LayerNames.ThreeDLayer).RemoveCurrentView();
-            
         }
     }
 }

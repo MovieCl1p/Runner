@@ -12,6 +12,7 @@ namespace Game.Commands
             levelModel.Player.Reset(levelModel.Level.StartPosition);
 
             levelModel.Player.Activate(true);
+            levelModel.Player.Accelerate();
         }
     }
 }

@@ -6,6 +6,10 @@ namespace Game.Player
 {
     public class MovementComponent
     {
+        private int _color1;
+        private int _color2;
+        private int _colorRestart;
+
         private PlayerController _player;
         private Transform _raycastTransform;
         private LayerMask _groundMask;
@@ -52,45 +56,49 @@ namespace Game.Player
             _player = player;
             _raycastTransform = raycastTransform;
             _groundMask = layerMask;
+
+            _color1 = LayerMask.NameToLayer("LevelColor1");
+            _color2 = LayerMask.NameToLayer("LevelColor2");
+            _colorRestart = LayerMask.NameToLayer("LevelColorRestart");
         }
 
         public void Accelerate()
         {
             _horizontalSpeed += _horizontalAccelSpeed;
         }
-
+        
         public void Update(float deltaTime, bool isJumpPressed)
         {
-            _grounded = false;
+            //_grounded = false;
 
-            Ray ray = new Ray(_raycastTransform.position, -_raycastTransform.up);
-            RaycastHit hit;
+            //Ray ray = new Ray(_raycastTransform.position, -_raycastTransform.up);
+            //RaycastHit hit;
 
-            Debug.DrawRay(_raycastTransform.position, -_raycastTransform.up, Color.red);
+            //Debug.DrawRay(_raycastTransform.position, -_raycastTransform.up, Color.red);
 
-            if (Physics.Raycast(ray, out hit, _groundMask))
-            {
-                float maxDist = Mathf.Max(0.3f, Mathf.Abs(0.028f * _verticalSpeed));
+            //if (Physics.Raycast(ray, out hit, _groundMask))
+            //{
+            //    float maxDist = Mathf.Max(0.3f, Mathf.Abs(0.035f * _verticalSpeed));
 
-                if (hit.distance < maxDist)
-                {
-                    _grounded = true;
-                    _inAir = false;
-                    _canDoubleJump = true;
-                    _player.CheckColor(hit.transform);
+            //    if (hit.distance < maxDist)
+            //    {
+            //        _grounded = true;
+            //        _inAir = false;
+            //        _canDoubleJump = true;
+            //        _player.CheckColor(hit.transform);
 
-                    if (_wasJumping)
-                    {
-                        _player.EmitTrail(true);
-                        //CreateParticles(maxDist);
-                        _wasJumping = false;
-                    }
-                }
-                else
-                {
-                    _inAir = true;
-                }
-            }
+            //        if (_wasJumping)
+            //        {
+            //            _player.EmitTrail(true);
+            //            //CreateParticles(maxDist);
+            //            _wasJumping = false;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        _inAir = true;
+            //    }
+            //}
 
             Move(1, _jump, deltaTime, isJumpPressed);
             _jump = false;
@@ -122,10 +130,12 @@ namespace Game.Player
 
             if (_inAir)
             {
+                
                 float jf = (isJumpPressed ? _jumpUpSpeed : _jumpDownSpeed);
                 _verticalSpeed -= jf;
-
                 _player.EmitTrailInAir(isJumpPressed);
+
+                _horizontalSpeed = _horizontalMinSpeed + (_horizontalMinSpeed * 0.1f);
             }
 
             _player.CachedTransform.Translate(_horizontalSpeed * deltaTime, _verticalSpeed * deltaTime, 0);
@@ -143,9 +153,61 @@ namespace Game.Player
             }
         }
 
+        public void CollisionStay(Collider other)
+        {
+            //float dist = Vector3.Distance(_raycastTransform.position, other.contacts[0].point);
+            //Debug.Log(dist);
+
+            //int collisionLayer = other.gameObject.layer;
+            //if (collisionLayer == _color1 || collisionLayer == _color2)
+            //{
+            //    _grounded = true;
+            //    _inAir = false;
+            //    _canDoubleJump = true;
+            //    _player.CheckColor(other.transform);
+            //    if (_wasJumping)
+            //    {
+            //        _player.EmitTrail(true);
+            //        _wasJumping = false;
+            //    }
+            //}
+        }
+
+        public void CollisionExit(Collider other)
+        {
+            int collisionLayer = other.gameObject.layer;
+            if (collisionLayer == _color1 || collisionLayer == _color2)
+            {
+                _inAir = true;
+                _grounded = false;
+            }
+        }
+
+        public void CollisionEnter(Collider other)
+        {   
+            int collisionLayer = other.gameObject.layer;
+            if (collisionLayer == _color1 || collisionLayer == _color2 || collisionLayer == _colorRestart)
+            {
+                _grounded = true;
+                _inAir = false;
+                _canDoubleJump = true;
+                _player.CheckColor(other.transform);
+                if (_wasJumping)
+                {
+                    _player.EmitTrail(true);
+                    _wasJumping = false;
+                }
+
+                var pos = other.ClosestPoint(_raycastTransform.position);
+                _player.CachedTransform.position = pos;
+            }
+        }
+
         public void Reset()
         {
+            _horizontalSpeed = 0;
             _verticalSpeed = 0;
+
             _jump = false;
             _inAir = false;
             _grounded = false;

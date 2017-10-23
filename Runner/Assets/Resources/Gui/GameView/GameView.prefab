@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   smoothDampTime: 0.2
-  cameraOffset: {x: 4.5, y: -2.5, z: 3.5}
+  cameraOffset: {x: 2.5, y: -2.5, z: 8}
 --- !u!114 &114415983534748710
 MonoBehaviour:
   m_ObjectHideFlags: 1

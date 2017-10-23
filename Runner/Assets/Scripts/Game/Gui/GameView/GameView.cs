@@ -56,14 +56,21 @@ namespace Game.Gui.GameView
         {
             base.OnScheduledUpdate();
 
+            _restartLevelCommand = new RestartLevelCommand();
+            _restartLevelCommand.Execute();
+
+            _camera.CachedTransform.position = _levelModel.Player.CachedTransform.position;
+
             _levelModel.Player.Activate(true);
             _levelModel.Player.Accelerate();
         }
         
         private void OnPlayerRestart()
         {
-            _restartLevelCommand = new RestartLevelCommand();
-            _restartLevelCommand.Execute();
+            _levelModel.Player.Activate(false);
+
+
+            ScheduleUpdate(1, false);
         }
 
         protected override void OnReleaseResources()

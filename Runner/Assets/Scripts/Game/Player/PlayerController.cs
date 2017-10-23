@@ -125,5 +125,20 @@ namespace Game.Player
 
             _active = false;
         }
+        
+        public void OnTriggerEnter(Collider other)
+        {
+            _move.CollisionEnter(other);
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            _move.CollisionExit(other);
+        }
+
+        public void OnTriggerStay(Collider other)
+        {
+            _move.CollisionStay(other);
+        }
     }
 }

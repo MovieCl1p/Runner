@@ -19,6 +19,8 @@ namespace Game.Gui.LevelWindow
 
         [SerializeField] private Transform _list;
 
+        [SerializeField] private RectTransform _content;
+
         [SerializeField] private Button BackBtn;
 
         private List<LevelItemView> _items = new List<LevelItemView>();
@@ -51,6 +53,11 @@ namespace Game.Gui.LevelWindow
 
                 _items.Add(item);
             }
+
+            Vector2 newSize = _content.sizeDelta;
+            newSize.x = levels.Count * _item.GetComponent<RectTransform>().sizeDelta.x;
+
+            _content.sizeDelta = newSize;
         }
 
         private void OnLevelClick(LevelConfig config)

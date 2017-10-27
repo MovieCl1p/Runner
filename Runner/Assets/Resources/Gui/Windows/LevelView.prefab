@@ -160,6 +160,7 @@ MonoBehaviour:
   _scheduledUpdate: 0
   _item: {fileID: 114542416529204022, guid: a98ad4209a8eff843b72b1ca5d5b1277, type: 2}
   _list: {fileID: 224318990643167886}
+  _content: {fileID: 224150422859000628}
   BackBtn: {fileID: 114991452141888764}
 --- !u!114 &114252022065294280
 MonoBehaviour:
@@ -404,10 +405,10 @@ RectTransform:
   m_Father: {fileID: 224873251071975740}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -512, y: 384}
+  m_SizeDelta: {x: 1024, y: 768}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224318990643167886
 RectTransform:

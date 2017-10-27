@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine:UnityEngine:ScriptableObject
   LevelName: First Normal
   LevelId: 3
-  LevelPrefab: {fileID: 1557164946660510, guid: 5aaf853e23dc2084eb23724dbb3503d2,
+  LevelPrefab: {fileID: 1557164946660510, guid: d164ac2743354f54d9080d3c040a7e48,
     type: 2}

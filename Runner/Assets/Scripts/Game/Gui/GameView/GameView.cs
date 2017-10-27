@@ -51,6 +51,7 @@ namespace Game.Gui.GameView
             base.Update();
 
             _time += Time.deltaTime;
+            _levelModel.LevelTime = _time;
         }
 
         private void OnLevelFinish()
@@ -63,6 +64,9 @@ namespace Game.Gui.GameView
         private void OnLevelRestart()
         {
             _restartLevelCommand.Execute();
+
+            _time = 0;
+            _levelModel.LevelTime = 0;
         }
 
         protected override void OnReleaseResources()

@@ -155,22 +155,11 @@ namespace Game.Player
 
         public void CollisionStay(Collider other)
         {
-            //float dist = Vector3.Distance(_raycastTransform.position, other.contacts[0].point);
-            //Debug.Log(dist);
-
-            //int collisionLayer = other.gameObject.layer;
-            //if (collisionLayer == _color1 || collisionLayer == _color2)
-            //{
-            //    _grounded = true;
-            //    _inAir = false;
-            //    _canDoubleJump = true;
-            //    _player.CheckColor(other.transform);
-            //    if (_wasJumping)
-            //    {
-            //        _player.EmitTrail(true);
-            //        _wasJumping = false;
-            //    }
-            //}
+            int collisionLayer = other.gameObject.layer;
+            if (collisionLayer == _color1 || collisionLayer == _color2 || collisionLayer == _colorRestart)
+            {
+                _player.CheckColor(other.transform);
+            }
         }
 
         public void CollisionExit(Collider other)

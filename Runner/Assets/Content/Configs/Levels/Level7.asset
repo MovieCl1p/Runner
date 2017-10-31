@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52adf5c0e09422d438751bb828318364, type: 3}
+  m_Name: Level7
+  m_EditorClassIdentifier: UnityEngine:UnityEngine:ScriptableObject
+  LevelName: Level 7
+  LevelId: 7
+  LevelPrefab: {fileID: 1242553696401668, guid: 46f77e08e7f1fc645b9b36e945910ef3,
+    type: 2}

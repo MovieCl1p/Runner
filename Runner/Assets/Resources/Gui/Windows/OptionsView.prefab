@@ -727,8 +727,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scheduledUpdate: 0
-  _backBtn: {fileID: 0}
-  _soundVolume: {fileID: 0}
+  _backBtn: {fileID: 114602799873254046}
+  _soundVolume: {fileID: 114465265919094134}
   _audioSource: {fileID: 82018902717298890}
 --- !u!114 &114919975751077940
 MonoBehaviour:

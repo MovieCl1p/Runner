@@ -16,5 +16,8 @@ namespace Game.Data
         public const string PauseView = "PauseView";
 
         public const string LoaderWindow = "LoaderWindow";
+
+
+        public const string LevelEditorView = "LevelEditorView";
     }
 }

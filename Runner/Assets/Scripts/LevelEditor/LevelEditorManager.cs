@@ -27,7 +27,7 @@ namespace LevelEditor
         
         private int _levelIndex;
 
-        private string inputLevel = "1";
+        private string inputLevel = "8";
         private LevelController _currentLevel;
         
         private void Start()
@@ -53,9 +53,10 @@ namespace LevelEditor
                 }
             }
 
-            inputLevel = GUI.TextField(new Rect(10, 130, 150, 50), inputLevel, 100);
+            inputLevel = GUI.TextField(new Rect(10, 130, 50, 50), inputLevel, 100);
 
             int index;
+
             if(int.TryParse(inputLevel, out index))
             {
                 if (GUI.Button(new Rect(10, 200, 150, 100), "Load Level"))
@@ -75,6 +76,12 @@ namespace LevelEditor
                     
                 }
 
+                if (GUI.Button(new Rect(10, 400, 150, 100), "Validate Platform Color"))
+                {
+                    //LoadLevel(jsonString);
+
+                }
+
                 if (GUI.Button(new Rect(500, 10, 100, 50), "Save Level"))
                 {
 
@@ -88,6 +95,8 @@ namespace LevelEditor
                     WriteDataToFile(jsonString);
                     
                 }
+
+                
             }
         }
         
@@ -123,15 +132,14 @@ namespace LevelEditor
 
             GameObject root = new GameObject("LevelRoot");
 
+            GameObject obj;
+
             for (int i = 0; i < Level.Objects.Count; i++)
             {
                 LevelObject levelObj = Level.Objects[i];
-                if (levelObj.ObjectName == "StartPosition")
-                {
 
-                }
+                obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 
-                GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 
                 obj.transform.SetParent(root.transform, true);
                 
@@ -161,6 +169,8 @@ namespace LevelEditor
                     obj.GetComponent<MeshRenderer>().material = _materialColor4;
                 }
             }
+
+
         }
     }
 }

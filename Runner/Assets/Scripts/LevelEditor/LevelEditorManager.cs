@@ -24,12 +24,12 @@ namespace LevelEditor
         private int _layerColor4;
 
         [SerializeField] private List<LevelConfig> _listLevels;
-        
+
         private int _levelIndex;
 
         private string inputLevel = "8";
         private LevelController _currentLevel;
-        
+
         private void Start()
         {
             _listLevels = new List<LevelConfig>();
@@ -41,7 +41,7 @@ namespace LevelEditor
 
         private void OnGUI()
         {
-            if (GUI.Button(new Rect(10, 10, 150, 100), "Load Level"))
+            if (GUI.Button(new Rect(10, 10, 100, 50), "Load Level"))
             {
                 string[] guids = AssetDatabase.FindAssets("t:LevelConfig", null);
 
@@ -53,36 +53,28 @@ namespace LevelEditor
                 }
             }
 
-            inputLevel = GUI.TextField(new Rect(10, 130, 50, 50), inputLevel, 100);
+            inputLevel = GUI.TextField(new Rect(130, 10, 50, 50), inputLevel, 100);
 
             int index;
 
-            if(int.TryParse(inputLevel, out index))
+            if (int.TryParse(inputLevel, out index))
             {
-                if (GUI.Button(new Rect(10, 200, 150, 100), "Load Level"))
+                if (GUI.Button(new Rect(10, 100, 200, 50), "level loading to scene"))
                 {
                     GameObject levelGo = GameObject.Instantiate(_listLevels[index].LevelPrefab);
                     _currentLevel = levelGo.GetComponent<LevelController>();
                 }
 
-                if (GUI.Button(new Rect(200, 10, 150, 100), "Start Level"))
+                if (GUI.Button(new Rect(200, 10, 200, 50), "upload level from json \n on scene"))
                 {
-                    //StartLevelEditorCommand command = new StartLevelEditorCommand(_currentLevel);
-                    //command.Execute();
+
                     string jsonString = File.ReadAllText(Application.dataPath + "/Content/Levels/Level.json");
-                    
+
                     LoadLevel(jsonString);
 
-                    
                 }
 
-                if (GUI.Button(new Rect(10, 400, 150, 100), "Validate Platform Color"))
-                {
-                    //LoadLevel(jsonString);
-
-                }
-
-                if (GUI.Button(new Rect(500, 10, 100, 50), "Save Level"))
+                if (GUI.Button(new Rect(500, 10, 200, 50), "Save Level in json"))
                 {
 
                     Level = new Level();
@@ -93,13 +85,24 @@ namespace LevelEditor
                     string jsonString = JsonUtility.ToJson(Level);
 
                     WriteDataToFile(jsonString);
-                    
+
                 }
 
-                
+                if (GUI.Button(new Rect(800, 10, 100, 50), "Start Game"))
+                {
+                    StartLevelEditorCommand command = new StartLevelEditorCommand(_currentLevel);
+                    command.Execute();
+
+                }
+
+                if (GUI.Button(new Rect(10, 300, 150, 50), "Validate Platform"))
+                {
+                    //LoadLevel(jsonString);
+
+                }
             }
         }
-        
+
         public GameObject TestObject;
         public Level Level;
 
@@ -115,13 +118,13 @@ namespace LevelEditor
 
         public static void WriteDataToFile(string jsonString)
         {
-            
+
             string path = Application.dataPath + "/Content/Levels/";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-            
+
             File.WriteAllText(path + "Level.json", jsonString);
         }
 
@@ -132,18 +135,15 @@ namespace LevelEditor
 
             GameObject root = new GameObject("LevelRoot");
 
-            GameObject obj;
-
             for (int i = 0; i < Level.Objects.Count; i++)
             {
                 LevelObject levelObj = Level.Objects[i];
 
-                obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                
-                
+                GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
                 obj.transform.SetParent(root.transform, true);
-                
-                obj.transform.position = new Vector3(levelObj.PositionX, levelObj.PositionY, levelObj.PositionZ); 
+
+                obj.transform.position = new Vector3(levelObj.PositionX, levelObj.PositionY, levelObj.PositionZ);
                 obj.transform.localScale = new Vector3(levelObj.ScaleX, levelObj.ScaleY, levelObj.ScaleZ);
                 obj.transform.rotation = Quaternion.Euler(new Vector3(levelObj.RotationX, levelObj.RotationY, levelObj.RotationZ));
 
@@ -169,8 +169,19 @@ namespace LevelEditor
                     obj.GetComponent<MeshRenderer>().material = _materialColor4;
                 }
             }
+        }
 
+        private void ValidatePlatform(Transform platform)
+        {
+            for (int i = 0; i < Level.Objects.Count; i++)
+            {
+                
+                LevelObject levelObj = Level.Objects[i];
+                
+                
+                SaveLevel(platform.transform.GetChild(i));
 
+            }
         }
     }
 }

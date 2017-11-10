@@ -12,7 +12,7 @@ namespace Game.Services
         private string _sceneName;
         private Action _callback;
 
-        public LevelController GetLevel(int episodeId, int levelId)
+        public levelcontroller GetLevel(int episodeId, int levelId)
         {
             var service = BindManager.GetInstance<ILevelService>();
             var episode = service.GetEpisode(episodeId);
@@ -31,7 +31,7 @@ namespace Game.Services
             }
 
             GameObject levelGo = GameObject.Instantiate(level.LevelPrefab);
-            LevelController result = levelGo.GetComponent<LevelController>();
+            levelcontroller result = levelGo.GetComponent<levelcontroller>();
 
             return result;
         }

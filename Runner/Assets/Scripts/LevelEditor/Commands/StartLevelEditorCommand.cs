@@ -14,10 +14,10 @@ namespace LevelEditor.Commands
 {
     public class StartLevelEditorCommand : ICommand
     {
-        private LevelController _currentLevel;
+        private levelcontroller _currentLevel;
         private LevelSessionModel _levelModel;
 
-        public StartLevelEditorCommand(LevelController level)
+        public StartLevelEditorCommand(levelcontroller level)
         {
             _currentLevel = level;
             _levelModel = BindManager.GetInstance<LevelSessionModel>();

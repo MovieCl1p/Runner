@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Components.Level
 {
-    public class LevelController : BaseMonoBehaviour
+    public class levelcontroller : BaseMonoBehaviour
     {
         [SerializeField]
         private Transform _startPosition;
@@ -37,5 +37,6 @@ namespace Game.Components.Level
             //Renderer platformRenderer = _lastPlatform.GetComponent<Renderer>();
             //platformRenderer.material.color = Color.green;
         }
+
     }
 }

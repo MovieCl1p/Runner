@@ -2,12 +2,10 @@
 using Game.Config.Levels;
 using LevelEditor.Commands;
 using LevelEditor.Data;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace LevelEditor
 {
@@ -28,7 +26,7 @@ namespace LevelEditor
         private int _levelIndex;
 
         private string inputLevel = "8";
-        private LevelController _currentLevel;
+        private levelcontroller _currentLevel;
 
         private void Start()
         {
@@ -41,7 +39,7 @@ namespace LevelEditor
 
         private void OnGUI()
         {
-            if (GUI.Button(new Rect(10, 10, 100, 50), "Load Level"))
+            if (GUI.Button(new Rect(10, 10, 100, 100), "Load Level"))
             {
                 string[] guids = AssetDatabase.FindAssets("t:LevelConfig", null);
 
@@ -59,13 +57,13 @@ namespace LevelEditor
 
             if (int.TryParse(inputLevel, out index))
             {
-                if (GUI.Button(new Rect(10, 100, 200, 50), "level loading to scene"))
+                if (GUI.Button(new Rect(10, 120, 200, 100), "level loading to scene"))
                 {
                     GameObject levelGo = GameObject.Instantiate(_listLevels[index].LevelPrefab);
-                    _currentLevel = levelGo.GetComponent<LevelController>();
+                    _currentLevel = levelGo.GetComponent<levelcontroller>();
                 }
 
-                if (GUI.Button(new Rect(200, 10, 200, 50), "upload level from json \n on scene"))
+                if (GUI.Button(new Rect(200, 10, 200, 100), "Load level from json \n on scene"))
                 {
 
                     string jsonString = File.ReadAllText(Application.dataPath + "/Content/Levels/Level.json");
@@ -74,7 +72,7 @@ namespace LevelEditor
 
                 }
 
-                if (GUI.Button(new Rect(500, 10, 200, 50), "Save Level in json"))
+                if (GUI.Button(new Rect(500, 10, 200, 100), "Save Level in json"))
                 {
 
                     Level = new Level();
@@ -88,14 +86,14 @@ namespace LevelEditor
 
                 }
 
-                if (GUI.Button(new Rect(800, 10, 100, 50), "Start Game"))
+                if (GUI.Button(new Rect(800, 10, 100, 100), "Start Game"))
                 {
                     StartLevelEditorCommand command = new StartLevelEditorCommand(_currentLevel);
                     command.Execute();
 
                 }
 
-                if (GUI.Button(new Rect(10, 300, 150, 50), "Validate Platform"))
+                if (GUI.Button(new Rect(10, 300, 150, 100), "Validate Platform"))
                 {
                     //LoadLevel(jsonString);
 

@@ -6,6 +6,6 @@ namespace Game.Services.Interfaces
 {
     public interface ILevelLoaderService
     {
-        LevelController GetLevel(int episodeId, int levelId);
+        levelcontroller GetLevel(int episodeId, int levelId);
     }
 }

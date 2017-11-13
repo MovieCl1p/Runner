@@ -26,7 +26,7 @@ namespace LevelEditor
         private int _levelIndex;
 
         private string inputLevel = "8";
-        private levelcontroller _currentLevel;
+        private LevelController _currentLevel;
 
         private void Start()
         {
@@ -60,7 +60,7 @@ namespace LevelEditor
                 if (GUI.Button(new Rect(10, 120, 200, 100), "level loading to scene"))
                 {
                     GameObject levelGo = GameObject.Instantiate(_listLevels[index].LevelPrefab);
-                    _currentLevel = levelGo.GetComponent<levelcontroller>();
+                    _currentLevel = levelGo.GetComponent<LevelController>();
                 }
 
                 if (GUI.Button(new Rect(200, 10, 200, 100), "Load level from json \n on scene"))

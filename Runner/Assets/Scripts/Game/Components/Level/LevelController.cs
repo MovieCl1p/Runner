@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Game.Components.Level
 {
-    public class levelcontroller : BaseMonoBehaviour
+    public class LevelController : BaseMonoBehaviour
     {
-        [SerializeField]
-        private Transform _startPosition;
+        [SerializeField] private Transform _startPosition;
 
-        [SerializeField]
-        private List<Renderer> _renderers;
+        [SerializeField] private int _playerColor;
+
+        [SerializeField] private List<Renderer> _renderers;
 
         private Transform _lastPlatform;
 

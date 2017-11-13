@@ -1,13 +1,17 @@
 ﻿using Core.UnityUtils;
+using Game.Gui.Components;
 using Game.Player.Control;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Experimental.UIElements;
 
 namespace Game.Player.Control
 {
     public class MobilePlayerControl : IPlayerControl, IUpdateHandler
     {
+        private PlayerControlView _playerView;
+        
         public event Action OnJumpClick;
 
         public event Action OnChangeColorClick;
@@ -33,32 +37,41 @@ namespace Game.Player.Control
         
         public void OnUpdate()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _jumpPress = true;
-                CallJumpClick();
-            }
+           
+        }
+        
+        public void SetView(PlayerControlView playerControlView)
+        {
+            _playerView = playerControlView;
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                _jumpPress = false;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                CallChangeColorClick();
-            }
+            _playerView.LeftButton.OnClick += OnChangeColor;
+            _playerView.RightButton.OnClick += OnJump;
+            _playerView.RightButton.OnPointDown += _jumpBtn_OnPointDown;
+            _playerView.RightButton.OnPointUp += _jumpBtn_OnPointUp;
         }
 
-        private void CallJumpClick()
+        private void _jumpBtn_OnPointUp()
         {
+            _jumpPress = false;
+        }
+
+        private void _jumpBtn_OnPointDown()
+        {
+            _jumpPress = true;
             if (OnJumpClick != null)
             {
                 OnJumpClick();
             }
         }
 
-        private void CallChangeColorClick()
+        private void OnJump()
+        {
+            
+
+            _jumpPress = false;
+        }
+
+        private void OnChangeColor()
         {
             if (OnChangeColorClick != null)
             {

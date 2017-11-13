@@ -23,7 +23,7 @@ namespace Game.Commands
         public void Execute()
         {
             var loaderService = BindManager.GetInstance<ILevelLoaderService>();
-            levelcontroller level = loaderService.GetLevel(_levelModel.EpisodeId, _levelModel.LevelId);
+            LevelController level = loaderService.GetLevel(_levelModel.EpisodeId, _levelModel.LevelId);
 
             var factory = BindManager.GetInstance<GameFactory>();
             var player = factory.GetPlayer();

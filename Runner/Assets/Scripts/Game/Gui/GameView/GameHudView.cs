@@ -5,6 +5,8 @@ using Core.Binder;
 using Game.Model;
 using Game.Data;
 using Game.Player.Control;
+using Game.Player;
+using Game.Gui.Components;
 
 namespace Game.Gui.GameView
 {
@@ -14,9 +16,9 @@ namespace Game.Gui.GameView
 
         [SerializeField] private Button _pauseBtn;
 
-        [SerializeField] private Button _jumpBtn;
+        [SerializeField] private ExtendedButton _jumpBtn;
 
-        [SerializeField] private Button _ChangeColorBtn;
+        [SerializeField] private ExtendedButton _ChangeColorBtn;
 
         private bool _paused;
 
@@ -32,21 +34,15 @@ namespace Game.Gui.GameView
 
             _levelTime.text = _levelModel.LevelTime.ToString();
 
-            _jumpBtn.onClick.AddListener(OnJumpClick);
-            _ChangeColorBtn.onClick.AddListener(OnChangeColorClick);
-            
+            var control = BindManager.GetInstance<IPlayerControl>();
+
+            PlayerControlView controlView = new PlayerControlView();
+            controlView.LeftButton = _jumpBtn;
+            controlView.RightButton = _ChangeColorBtn;
+
+            control.SetView(controlView);
         }
-
-        private void OnChangeColorClick()
-        {
-
-        }
-
-        private void OnJumpClick()
-        {
-
-        }
-
+        
         private void OnPauseClick()
         {
             Time.timeScale = 0;

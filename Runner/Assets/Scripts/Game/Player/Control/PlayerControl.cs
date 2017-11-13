@@ -64,5 +64,10 @@ namespace Game.Player.Control
                 OnChangeColorClick();
             }
         }
+
+        public void SetView(PlayerControlView playerControlView)
+        {
+            
+        }
     }
 }

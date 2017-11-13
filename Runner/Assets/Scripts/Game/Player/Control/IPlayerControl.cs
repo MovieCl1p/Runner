@@ -9,5 +9,7 @@ namespace Game.Player.Control
         event Action OnJumpClick;
 
         event Action OnChangeColorClick;
+
+        void SetView(PlayerControlView playerControlView);
     }
 }

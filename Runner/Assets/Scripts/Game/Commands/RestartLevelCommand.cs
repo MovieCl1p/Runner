@@ -5,6 +5,8 @@ using Core.Commands;
 using Core.UnityUtils;
 using Game.Model;
 using UnityEngine;
+using Game.Player;
+using Game.Components.Level;
 
 namespace Game.Commands
 {
@@ -20,13 +22,13 @@ namespace Game.Commands
         public void Execute()
         {
             var levelModel = BindManager.GetInstance<LevelSessionModel>();
+
             levelModel.Player.Reset(levelModel.Level.StartPosition);
-            
-            _cameraTransform.position = levelModel.Level.StartPosition;
-
+            levelModel.Player.ChangeColor(levelModel.Level.StartColor);
             levelModel.Player.Activate(false);
-            
 
+            _cameraTransform.position = levelModel.Level.StartPosition;
+            
             CoroutineHelper.Instance.StartCoroutine(Countdown());
         }
 

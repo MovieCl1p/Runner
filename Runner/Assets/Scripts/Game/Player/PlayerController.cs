@@ -6,6 +6,7 @@ using System;
 using Game.Commands;
 using Core.Dispatcher;
 using Game.Events;
+using Game.Components.Level;
 
 namespace Game.Player
 {
@@ -139,6 +140,15 @@ namespace Game.Player
         public void OnTriggerStay(Collider other)
         {
             _move.CollisionStay(other);
+        }
+
+        public void ChangeColor(PlayerColors color)
+        {
+            int newColor = color == PlayerColors.First ? -1 : 1;
+            _view.ChangeColor(newColor);
+
+            _currentColorK = newColor;
+            _currentColor = color == PlayerColors.First ? 16 : 17;
         }
     }
 }

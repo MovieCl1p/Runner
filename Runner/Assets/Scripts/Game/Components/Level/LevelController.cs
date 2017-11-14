@@ -1,4 +1,5 @@
 ﻿using Core;
+using Game.Player;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,13 +9,15 @@ namespace Game.Components.Level
     {
         [SerializeField] private Transform _startPosition;
 
-        [SerializeField] private int _playerColor;
+        [SerializeField] private PlayerColors _playerColor;
 
         [SerializeField] private List<Renderer> _renderers;
 
         private Transform _lastPlatform;
 
         public Vector3 StartPosition { get { return _startPosition.position; } }
+
+        public PlayerColors StartColor { get { return _playerColor; } }
         
 
         public void UpdatePlayerPosition(Transform platform, Vector3 playerPosition)
@@ -25,6 +28,7 @@ namespace Game.Components.Level
                 {
                     Renderer platformRenderer = _lastPlatform.GetComponent<Renderer>();
                     platformRenderer.material.color = Color.blue;
+                    
                 }
 
                 _lastPlatform = platform;

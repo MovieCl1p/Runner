@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: FloorMaterial
-  m_Shader: {fileID: 4800000, guid: a209cf6978a5543428b8772675b13d12, type: 3}
+  m_Shader: {fileID: 4800000, guid: 493b5fe6a7692c84ea2b8187a2b7057d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
@@ -36,4 +36,5 @@ Material:
     - resolution: 90
     - vstep: 0.294
     m_Colors:
+    - _MainColor: {r: 0.1875, g: 0.4008621, b: 0.75, a: 1}
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}

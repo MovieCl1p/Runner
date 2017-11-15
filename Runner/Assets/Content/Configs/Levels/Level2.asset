@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52adf5c0e09422d438751bb828318364, type: 3}
   m_Name: Level2
   m_EditorClassIdentifier: UnityEngine:UnityEngine:ScriptableObject
-  LevelName: 2 Warm Up
+  LevelName: Level2
   LevelId: 2
   LevelPrefab: {fileID: 1557164946660510, guid: 373df8009dd9b934ea23a4c6046d484a,
     type: 2}

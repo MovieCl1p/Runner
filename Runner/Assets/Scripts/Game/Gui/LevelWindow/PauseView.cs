@@ -24,16 +24,16 @@ namespace Game.Gui.LevelWindow
 
             _backButton.onClick.AddListener(OnBackClick);
 
-            _MenuButton.onClick.AddListener(OnMenuClick);
+            _MenuButton.onClick.AddListener(OnLevelMenuClick);
 
             _levelModel = BindManager.GetInstance<LevelSessionModel>();
             
             _levelTime.text = _levelModel.LevelTime.ToString();
         }
 
-        private void OnMenuClick()
+        private void OnLevelMenuClick()
         {
-            ViewManager.Instance.SetView(ViewNames.LevelView);
+            ViewManager.Instance.SetView(ViewNames.EpisodeView);
         }
 
         private void OnBackClick()

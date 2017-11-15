@@ -21,7 +21,7 @@ namespace Game.Gui.LevelWindow
 
         [SerializeField] private RectTransform _content;
 
-        [SerializeField] private Button BackBtn;
+        [SerializeField] private Button _BackBtn;
 
         private List<LevelItemView> _items = new List<LevelItemView>();
 
@@ -30,13 +30,18 @@ namespace Game.Gui.LevelWindow
         protected override void Start()
         {
             base.Start();
-
+            _BackBtn.onClick.AddListener(OnEpisodeMenuClick);
             int episodeId = (int) Options;
             ILevelService service = BindManager.GetInstance<ILevelService>();
 
             _episodeConfig = service.GetEpisode(episodeId);
             
             UpdateView(_episodeConfig.Levels);
+        }
+
+        private void OnEpisodeMenuClick()
+        {
+            ViewManager.Instance.SetView(ViewNames.EpisodeView);
         }
 
         public void UpdateView(List<LevelConfig> levels)

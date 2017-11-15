@@ -7,7 +7,7 @@ using Game.Config.Episodes;
 
 namespace Game.Gui.ChapterWindow
 {
-    public class ChapterItemView : BaseMonoBehaviour
+    public class EpisodeItemView : BaseMonoBehaviour
     {
         public event Action<EpisodeConfig> OnClick;
 

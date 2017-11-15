@@ -21,7 +21,7 @@ namespace Game.Gui.GameView
 
         [SerializeField] private ExtendedButton _ChangeColorBtn;
 
-        [SerializeField] private Button _PlayerSpeedBtn;
+        //[SerializeField] private Button _PlayerSpeedBtn;
 
         private bool _paused;
 
@@ -33,7 +33,7 @@ namespace Game.Gui.GameView
 
             _pauseBtn.onClick.AddListener(OnPauseClick);
 
-            _PlayerSpeedBtn.onClick.AddListener(OnAddPlayerSpeed);
+            //_PlayerSpeedBtn.onClick.AddListener(OnAddPlayerSpeed);
 
             _levelModel = BindManager.GetInstance<LevelSessionModel>();
 

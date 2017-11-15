@@ -7816,7 +7816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startPosition: {fileID: 4169069331048090}
-  _playerColor: 0
+  _playerColor: 1
   _renderers: []
 --- !u!114 &114487556298772006
 MonoBehaviour:

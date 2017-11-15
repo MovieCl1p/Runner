@@ -11,23 +11,30 @@ using Game.Config.Episodes;
 
 namespace Game.Gui.ChapterWindow
 {
-    public class ChapterView : BaseView
+    public class EpisodeView : BaseView
     {
-        [SerializeField] private ChapterItemView _item;
+        [SerializeField] private EpisodeItemView _item;
         [SerializeField] private Transform _list;
 
         [SerializeField] private Button _backBtn;
 
-        private List<ChapterItemView> _items = new List<ChapterItemView>();
+        private List<EpisodeItemView> _items = new List<EpisodeItemView>();
 
         protected override void Start()
         {
             base.Start();
 
+            _backBtn.onClick.AddListener(OnMainClick);
+
             var service = BindManager.GetInstance<ILevelService>();
             var episodes = service.GetEpisodes();
             
             UpdateView(episodes);
+        }
+
+        private void OnMainClick()
+        {
+            CloseView();
         }
 
         public void UpdateView(List<EpisodeConfig> episodes)
@@ -36,7 +43,7 @@ namespace Game.Gui.ChapterWindow
 
             for (int i = 0; i < episodes.Count; i++)
             {
-                ChapterItemView item = Instantiate<ChapterItemView>(_item, _list);
+                EpisodeItemView item = Instantiate<EpisodeItemView>(_item, _list);
                 item.UpdateView(episodes[i]);
 
                 item.OnClick += OnEpisodeClick;

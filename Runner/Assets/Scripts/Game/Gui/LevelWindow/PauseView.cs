@@ -1,7 +1,9 @@
 ﻿using System;
 using Core.Binder;
+using Core.Dispatcher;
 using Core.ViewManager;
 using Game.Data;
+using Game.Events;
 using Game.Model;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +35,11 @@ namespace Game.Gui.LevelWindow
 
         private void OnLevelMenuClick()
         {
+            ViewManager.Instance.SetView(ViewNames.MainMenuScreen);
             ViewManager.Instance.SetView(ViewNames.EpisodeView);
+            
+            IDispatcher dispatcher = BindManager.GetInstance<IDispatcher>();
+            dispatcher.Dispatch(LevelEventsEnum.Quit);
         }
 
         private void OnBackClick()

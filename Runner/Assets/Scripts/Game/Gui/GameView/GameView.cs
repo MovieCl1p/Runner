@@ -37,6 +37,7 @@ namespace Game.Gui.GameView
             _dispatcher = BindManager.GetInstance<IDispatcher>();
             _dispatcher.AddListener(LevelEventsEnum.Restart, OnLevelRestart);
             _dispatcher.AddListener(LevelEventsEnum.Finish, OnLevelFinish);
+            _dispatcher.AddListener(LevelEventsEnum.Quit, OnLevelQuit);
 
             _levelModel = BindManager.GetInstance<LevelSessionModel>();
             
@@ -69,15 +70,33 @@ namespace Game.Gui.GameView
             _levelModel.LevelTime = 0;
         }
 
+        private void OnLevelQuit()
+        {
+            OnReleaseResources();
+        }
+        
         protected override void OnReleaseResources()
         {
             base.OnReleaseResources();
 
             _dispatcher.RemoveListener(LevelEventsEnum.Restart, OnLevelRestart);
             _dispatcher.RemoveListener(LevelEventsEnum.Finish, OnLevelFinish);
+            _dispatcher.RemoveListener(LevelEventsEnum.Quit, OnLevelQuit);
 
-            Destroy(_levelModel.Level.gameObject);
-            Destroy(_levelModel.Player.gameObject);
+            if (_levelModel.Level != null)
+            {
+                Destroy(_levelModel.Level.gameObject);
+            }
+
+            if (_levelModel.Player != null)
+            {
+                Destroy(_levelModel.Player.gameObject);
+            }
+
+            if (ViewManager.Instance.GetLayerById(LayerNames.ThreeDLayer).Current)
+            {
+                ViewManager.Instance.GetLayerById(LayerNames.ThreeDLayer).Current.CloseView();
+            }
         }
     }
 }

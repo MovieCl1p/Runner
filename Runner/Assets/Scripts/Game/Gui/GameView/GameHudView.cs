@@ -33,8 +33,6 @@ namespace Game.Gui.GameView
 
             _pauseBtn.onClick.AddListener(OnPauseClick);
 
-            //_PlayerSpeedBtn.onClick.AddListener(OnAddPlayerSpeed);
-
             _levelModel = BindManager.GetInstance<LevelSessionModel>();
 
             _levelTime.text = _levelModel.LevelTime.ToString();
@@ -46,11 +44,6 @@ namespace Game.Gui.GameView
             controlView.RightButton = _ChangeColorBtn;
 
             control.SetView(controlView);
-        }
-
-        private void OnAddPlayerSpeed()
-        {
-            
         }
 
         private void OnPauseClick()
@@ -66,6 +59,13 @@ namespace Game.Gui.GameView
             
             _levelTime.text = _levelModel.LevelTime.ToString();
 
+        }
+
+        protected override void OnReleaseResources()
+        {
+            base.OnReleaseResources();
+            
+            _pauseBtn.onClick.RemoveListener(OnPauseClick);
         }
     }
 }

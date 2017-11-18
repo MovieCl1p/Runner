@@ -15,6 +15,8 @@ namespace Game.Gui.LevelWindow
 {
     public class LevelView : BaseView
     {
+        [SerializeField] private Animator _animator;
+        
         [SerializeField] private LevelItemView _item;
 
         [SerializeField] private Transform _list;
@@ -30,6 +32,11 @@ namespace Game.Gui.LevelWindow
         protected override void Start()
         {
             base.Start();
+            if (_animator != null)
+            {
+                _animator.SetTrigger("Show");
+            }
+            
             _BackBtn.onClick.AddListener(OnEpisodeMenuClick);
             int episodeId = (int) Options;
             ILevelService service = BindManager.GetInstance<ILevelService>();

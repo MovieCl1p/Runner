@@ -187,8 +187,13 @@ namespace Game.Player
                     _wasJumping = false;
                 }
 
-                var pos = other.ClosestPoint(_raycastTransform.position);
-                _player.CachedTransform.position = pos;
+                Vector3 pos = other.ClosestPoint(_raycastTransform.position);
+                if (pos.y < other.bounds.max.y)
+                {
+                    pos.y = other.bounds.max.y;
+                }
+                
+                _player.CachedTransform.position = pos - _raycastTransform.localPosition;
 
                 _player.CheckColor(other.transform);
             }
@@ -203,7 +208,7 @@ namespace Game.Player
             _inAir = false;
             _grounded = false;
             _doubleJump = false;
-            _canDoubleJump = false;
+            _canDoubleJump = true;
         }
 
         public void OnJump()

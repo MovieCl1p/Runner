@@ -24,8 +24,8 @@ namespace Game.Config
 
 
 
-            //BindManager.Bind<IPlayerControl>().To<PlayerControl>().ToSingleton();
-            BindManager.Bind<IPlayerControl>().To<MobilePlayerControl>().ToSingleton();
+            BindManager.Bind<IPlayerControl>().To<PlayerControl>().ToSingleton();
+//            BindManager.Bind<IPlayerControl>().To<MobilePlayerControl>().ToSingleton();
             BindManager.Bind<GameFactory>().ToSingleton();
         }
 

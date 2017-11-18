@@ -7,10 +7,13 @@ namespace Game.Components
     {
         public Transform target;
         public float smoothDampTime = 0.2f;
+        public float verticalSmoothDampTime = 0.3f;
         
         public Vector3 cameraOffset;
         
         private Vector3 _smoothDampVelocity;
+        private Vector3 _verticalSmoothDampVelocity;
+
         
         public void FixedUpdate()
         {
@@ -23,26 +26,14 @@ namespace Game.Components
             {
                 return;
             }
+            
+            Vector3 horizontal = Vector3.SmoothDamp(CachedTransform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
+            Vector3 vertical = Vector3.SmoothDamp(CachedTransform.position, target.position - cameraOffset, ref _verticalSmoothDampVelocity, verticalSmoothDampTime);
 
-            CachedTransform.position = Vector3.SmoothDamp(CachedTransform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
+            
+            CachedTransform.position = new Vector3(horizontal.x, vertical.y, horizontal.z);
+//            CachedTransform.position = Vector3.SmoothDamp(CachedTransform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
 
-
-            //if (_playerController == null)
-            //{
-            //    transform.position = Vector3.SmoothDamp(transform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
-            //    return;
-            //}
-
-            //if (_playerController.velocity.x > 0)
-            //{
-            //    transform.position = Vector3.SmoothDamp(transform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
-            //}
-            //else
-            //{
-            //    var leftOffset = cameraOffset;
-            //    leftOffset.x *= -1;
-            //    transform.position = Vector3.SmoothDamp(transform.position, target.position - leftOffset, ref _smoothDampVelocity, smoothDampTime);
-            //}
         }
     }
 }

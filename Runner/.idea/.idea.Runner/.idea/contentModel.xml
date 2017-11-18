@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/Library/Caches/Rider2017.2/resharper-host/local/Transient/ReSharperHost/v10/SolutionCaches/_Runner.-343527200.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Content" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="BarycentricCoords.cs" t="Include" />
+            <e p="Blur.shader" t="Include" />
+            <e p="Color.shader" t="Include" />
+            <e p="PlanarReflection.shader" t="Include" />
+            <e p="WaterBlurFinal.shader" t="Include" />
+            <e p="Wireframe.shader" t="Include" />
+          </e>
+        </e>
+        <e p="Plugins" t="Include">
+          <e p="Editor" t="Include">
+            <e p="JetBrains" t="Include">
+              <e p="Unity3DRider.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="RealtimeReflections" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="PlanarRealtimeReflection.cs" t="Include" />
+            <e p="RealtimeReflections.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Core" t="Include">
+            <e p="BaseMonoBehaviour.cs" t="Include" />
+            <e p="Binder" t="Include">
+              <e p="BindField.cs" t="Include" />
+              <e p="BindItem.cs" t="Include" />
+              <e p="BindManager.cs" t="Include" />
+            </e>
+            <e p="Commands" t="Include">
+              <e p="ICommand.cs" t="Include" />
+            </e>
+            <e p="Database" t="Include">
+              <e p="SQLite.cs" t="Include" />
+              <e p="SQLRunner.cs" t="Include" />
+              <e p="SQLStatement.cs" t="Include" />
+            </e>
+            <e p="Dispatcher" t="Include">
+              <e p="Dispatcher.cs" t="Include" />
+              <e p="IDispatcher.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="EditorHelper.cs" t="Include" />
+            </e>
+            <e p="MonoScheduledBehaviour.cs" t="Include" />
+            <e p="ResourceManager" t="Include">
+              <e p="ResourcesCache.cs" t="Include" />
+            </e>
+            <e p="SingletonMonoBehaviour.cs" t="Include" />
+            <e p="UnityUtils" t="Include">
+              <e p="CoroutineHelper.cs" t="Include" />
+              <e p="DelayedProcess.cs" t="Include" />
+              <e p="Loom" t="Include">
+                <e p="Loom.cs" t="Include" />
+                <e p="LoomUnit.cs" t="Include" />
+              </e>
+              <e p="UpdateNotifier.cs" t="Include" />
+            </e>
+            <e p="Utils" t="Include">
+              <e p="ActionUtils" t="Include">
+                <e p="ActionQueue.cs" t="Include" />
+                <e p="Actions" t="Include">
+                  <e p="BaseAction.cs" t="Include" />
+                  <e p="IAction.cs" t="Include" />
+                  <e p="InvokeMethodAction.cs" t="Include" />
+                </e>
+              </e>
+              <e p="FileUtils.cs" t="Include" />
+              <e p="TimeUtils.cs" t="Include" />
+            </e>
+            <e p="ViewManager" t="Include">
+              <e p="BaseView.cs" t="Include" />
+              <e p="IViewManager.cs" t="Include" />
+              <e p="View.cs" t="Include" />
+              <e p="ViewLayer.cs" t="Include" />
+              <e p="ViewManager.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Editor" t="Include">
+            <e p="LevelEditor" t="Include">
+              <e p="Commands" t="Include">
+                <e p="LevelEditorStart.cs" t="Include" />
+                <e p="StartLevelEditorCommand.cs" t="Include" />
+              </e>
+              <e p="Configs" t="Include">
+                <e p="LevelEditorConfig.cs" t="Include" />
+              </e>
+              <e p="Data" t="Include">
+                <e p="Level.cs" t="Include" />
+                <e p="LevelObject.cs" t="Include" />
+              </e>
+              <e p="LevelEditorManager.cs" t="Include" />
+              <e p="LevelEditorRoot.cs" t="Include" />
+              <e p="LevelEditorView.cs" t="Include" />
+              <e p="LevelValidator.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Game" t="Include">
+            <e p="AppRoot.cs" t="Include" />
+            <e p="Commands" t="Include">
+              <e p="RestartLevelCommand.cs" t="Include" />
+              <e p="RunNextLevelCommand.cs" t="Include" />
+              <e p="StartCommand.cs" t="Include" />
+              <e p="StartLevelCommand.cs" t="Include" />
+            </e>
+            <e p="Components" t="Include">
+              <e p="CameraSmoothFollow.cs" t="Include" />
+              <e p="Level" t="Include">
+                <e p="LevelController.cs" t="Include" />
+              </e>
+              <e p="Triggers" t="Include">
+                <e p="FinishTrigger.cs" t="Include" />
+                <e p="RestartTrigger.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Config" t="Include">
+              <e p="AppConfig.cs" t="Include" />
+              <e p="Episodes" t="Include">
+                <e p="EpisodeConfig.cs" t="Include" />
+              </e>
+              <e p="Levels" t="Include">
+                <e p="ILevelConfig.cs" t="Include" />
+                <e p="LevelConfig.cs" t="Include" />
+              </e>
+              <e p="UIConfig.cs" t="Include" />
+              <e p="UIView.cs" t="Include" />
+            </e>
+            <e p="Data" t="Include">
+              <e p="LayerNames.cs" t="Include" />
+              <e p="ViewNames.cs" t="Include" />
+            </e>
+            <e p="Events" t="Include">
+              <e p="AppEvents.cs" t="Include" />
+              <e p="LevelEventsEnum.cs" t="Include" />
+            </e>
+            <e p="Factory" t="Include">
+              <e p="GameFactory.cs" t="Include" />
+            </e>
+            <e p="Gui" t="Include">
+              <e p="Components" t="Include">
+                <e p="ExtendedButton.cs" t="Include" />
+              </e>
+              <e p="EpisodeWindow" t="Include">
+                <e p="EpisodeItemView.cs" t="Include" />
+                <e p="EpisodeView.cs" t="Include" />
+              </e>
+              <e p="GameView" t="Include">
+                <e p="GameHudView.cs" t="Include" />
+                <e p="GameView.cs" t="Include" />
+              </e>
+              <e p="LevelWindow" t="Include">
+                <e p="FinishView.cs" t="Include" />
+                <e p="LevelItemView.cs" t="Include" />
+                <e p="LevelView.cs" t="Include" />
+                <e p="PauseView.cs" t="Include" />
+              </e>
+              <e p="MainMenu" t="Include">
+                <e p="MainMenuView.cs" t="Include" />
+              </e>
+              <e p="OptionsView" t="Include">
+                <e p="OptionsView.cs" t="Include" />
+              </e>
+              <e p="Splash" t="Include">
+                <e p="SplashView.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Model" t="Include">
+              <e p="LevelSessionModel.cs" t="Include" />
+            </e>
+            <e p="Player" t="Include">
+              <e p="ColorChecker.cs" t="Include" />
+              <e p="Control" t="Include">
+                <e p="IPlayerControl.cs" t="Include" />
+                <e p="MobilePlayerControl.cs" t="Include" />
+                <e p="PlayerControl.cs" t="Include" />
+              </e>
+              <e p="MovementComponent.cs" t="Include" />
+              <e p="PlayerAnimation.cs" t="Include" />
+              <e p="PlayerColors.cs" t="Include" />
+              <e p="PlayerController.cs" t="Include" />
+              <e p="PlayerControlView.cs" t="Include" />
+              <e p="PlayerView.cs" t="Include" />
+              <e p="Tags.cs" t="Include" />
+            </e>
+            <e p="Services" t="Include">
+              <e p="Interfaces" t="Include">
+                <e p="ILevelLoaderService.cs" t="Include" />
+                <e p="ILevelService.cs" t="Include" />
+              </e>
+              <e p="LevelLoaderService.cs" t="Include" />
+              <e p="LevelService.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Test.cs" t="Include" />
+        </e>
+        <e p="Wispy Sky" t="Include">
+          <e p="ReadMe.txt" t="Include" />
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Runner.sln" t="IncludeFlat" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>

@@ -40,6 +40,8 @@ namespace Game.Gui.LevelWindow
             
             IDispatcher dispatcher = BindManager.GetInstance<IDispatcher>();
             dispatcher.Dispatch(LevelEventsEnum.Quit);
+
+            Time.timeScale = 1;
         }
 
         private void OnBackClick()

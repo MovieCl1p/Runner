@@ -6,17 +6,17 @@ namespace Game.Player
     {
         private const int MaxFallSpeed = -40;
 
-        private const float HorizontalMinSpeed = 20;
-        private const float HorizontalAccelForce = 20;
-        private const float HorizontalSlowSpeed = 1;
+        public float HorizontalMinSpeed = 30;
+        public float HorizontalAccelForce = 35;
+        public float HorizontalSlowSpeed = 1;
 
-        private const float JumpPressedSlowDownSpeed = 1f;
+        public float JumpPressedSlowDownSpeed = 1f;
         private const float JumpSlowDownSpeed = 1.0f;
-        private const float JumpForce = 24;
+        public float JumpForce = 24;
 
-        private const float MaxJumpAccelTime = 0.1f;
+        public float MaxJumpAccelTime = 0.1f;
 
-        private const float Gravity = -1.2f;
+        public float Gravity = -1.2f;
 
         private int _color1;
         private int _color2;
@@ -71,7 +71,7 @@ namespace Game.Player
 
         public void Accelerate()
         {
-            _horizontalSpeed += HorizontalAccelForce;
+            //_horizontalSpeed += HorizontalAccelForce;
         }
         
         public void Update(float deltaTime, bool isJumpPressed)

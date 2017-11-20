@@ -20,6 +20,15 @@ namespace Game.Player
 
         [SerializeField]
         private PlayerView _view;
+        
+        public float HorizontalMinSpeed = 35;
+        public float HorizontalAccelForce = 35;
+        public float HorizontalSlowSpeed = 1;
+        public float JumpPressedSlowDownSpeed = 1.3f;
+        public float JumpForce = 32;
+        public float MaxJumpAccelTime = 0.2f;
+        public float Gravity = -1.5f;
+
 
         private bool _active = true;
 
@@ -59,6 +68,14 @@ namespace Game.Player
             {
                 return;
             }
+
+            _move.HorizontalMinSpeed = HorizontalMinSpeed;
+            _move.HorizontalAccelForce = HorizontalAccelForce;
+            _move.HorizontalSlowSpeed = HorizontalSlowSpeed;
+            _move.JumpPressedSlowDownSpeed = JumpPressedSlowDownSpeed;
+            _move.JumpForce = JumpForce;
+            _move.MaxJumpAccelTime = MaxJumpAccelTime;
+            _move.Gravity = Gravity;
 
             _move.Update(Time.deltaTime, _control.IsJumpPressed);
         }

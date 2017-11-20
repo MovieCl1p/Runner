@@ -1,11 +1,23 @@
-﻿
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Player
 {
     public class MovementComponent
     {
+        private const int MaxFallSpeed = -40;
+
+        private const float HorizontalMinSpeed = 20;
+        private const float HorizontalAccelForce = 20;
+        private const float HorizontalSlowSpeed = 1;
+
+        private const float JumpPressedSlowDownSpeed = 1f;
+        private const float JumpSlowDownSpeed = 1.0f;
+        private const float JumpForce = 24;
+
+        private const float MaxJumpAccelTime = 0.1f;
+
+        private const float Gravity = -1.2f;
+
         private int _color1;
         private int _color2;
         private int _colorRestart;
@@ -13,20 +25,15 @@ namespace Game.Player
         private PlayerController _player;
         private Transform _raycastTransform;
         private LayerMask _groundMask;
-
-        private float _horizontalMinSpeed = 25;
-        private float _horizontalSpeed = 25;
+        
+        private float _horizontalSpeed = 50;
         private float _verticalSpeed = 0;
-
-        private float _horizontalAccelSpeed = 20;
-        private float _horizontalSlowSpeed = 1;
-
-        private float _gravity = 0.5f;
-
-        private float _jumpForce = 20;
-        private float _jumpUpSpeed = 0.1f;
-        private float _jumpDownSpeed = 1.0f;
-
+        
+        private float _jumpAccelTime = 0;
+        
+        private float _currentVerticalAccell = 0;
+        private float _currentHorizontalAccell = 0;
+        
         private bool _jump;
         private bool _inAir;
         private bool _grounded;
@@ -64,42 +71,11 @@ namespace Game.Player
 
         public void Accelerate()
         {
-            _horizontalSpeed += _horizontalAccelSpeed;
+            _horizontalSpeed += HorizontalAccelForce;
         }
         
         public void Update(float deltaTime, bool isJumpPressed)
         {
-            //_grounded = false;
-
-            //Ray ray = new Ray(_raycastTransform.position, -_raycastTransform.up);
-            //RaycastHit hit;
-
-            //Debug.DrawRay(_raycastTransform.position, -_raycastTransform.up, Color.red);
-
-            //if (Physics.Raycast(ray, out hit, _groundMask))
-            //{
-            //    float maxDist = Mathf.Max(0.3f, Mathf.Abs(0.035f * _verticalSpeed));
-
-            //    if (hit.distance < maxDist)
-            //    {
-            //        _grounded = true;
-            //        _inAir = false;
-            //        _canDoubleJump = true;
-            //        _player.CheckColor(hit.transform);
-
-            //        if (_wasJumping)
-            //        {
-            //            _player.EmitTrail(true);
-            //            //CreateParticles(maxDist);
-            //            _wasJumping = false;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        _inAir = true;
-            //    }
-            //}
-
             Move(1, _jump, deltaTime, isJumpPressed);
             _jump = false;
             _doubleJump = false;
@@ -111,45 +87,48 @@ namespace Game.Player
             {
                 _verticalSpeed = 0;
             }
-            else
-            {
-                _verticalSpeed -= _gravity;
-            }
 
             if (_grounded && jump)
             {
-                _verticalSpeed = _jumpForce;
                 _inAir = true;
                 _wasJumping = true;
+                AddAccells();
             }
 
             if (_inAir && _doubleJump)
             {
-                _verticalSpeed = _jumpForce;
+                AddAccells();
             }
-
+            
             if (_inAir)
             {
-                
-                float jf = (isJumpPressed ? _jumpUpSpeed : _jumpDownSpeed);
-                _verticalSpeed -= jf;
-                _player.EmitTrailInAir(isJumpPressed);
+                _jumpAccelTime += Time.deltaTime;
+                _currentVerticalAccell -= JumpPressedSlowDownSpeed;
 
-                _horizontalSpeed = _horizontalMinSpeed + (_horizontalMinSpeed * 0.1f);
+                if (isJumpPressed)
+                {   
+                    if (_jumpAccelTime < MaxJumpAccelTime)
+                    {
+                        _verticalSpeed = Mathf.Lerp(_verticalSpeed, _currentVerticalAccell, _jumpAccelTime / MaxJumpAccelTime);
+                        _horizontalSpeed = Mathf.Lerp(_horizontalSpeed, _currentHorizontalAccell, _jumpAccelTime / MaxJumpAccelTime);
+                    }
+                }
+                
+                _player.EmitTrailInAir(isJumpPressed);
             }
 
             _player.CachedTransform.Translate(_horizontalSpeed * deltaTime, _verticalSpeed * deltaTime, 0);
 
-            _verticalSpeed -= _gravity;
-            if (_verticalSpeed < -35)
+            _verticalSpeed += Gravity;
+            if (_verticalSpeed < MaxFallSpeed)
             {
-                _verticalSpeed = -35;
+                _verticalSpeed = MaxFallSpeed;
             }
 
-            _horizontalSpeed -= _horizontalSlowSpeed;
-            if(_horizontalSpeed < _horizontalMinSpeed)
+            _horizontalSpeed -= HorizontalSlowSpeed;
+            if(_horizontalSpeed < HorizontalMinSpeed)
             {
-                _horizontalSpeed = _horizontalMinSpeed;
+                _horizontalSpeed = HorizontalMinSpeed;
             }
         }
 
@@ -209,16 +188,28 @@ namespace Game.Player
             _grounded = false;
             _doubleJump = false;
             _canDoubleJump = true;
+
+            _jumpAccelTime = 0;
+            _currentVerticalAccell = 0;
+            _currentHorizontalAccell = 0;
         }
 
         public void OnJump()
         {
             _jump = true;
+            
             if (_inAir && _canDoubleJump)
             {
                 _doubleJump = true;
                 _canDoubleJump = false;
             }
+        }
+
+        private void AddAccells()
+        {
+            _jumpAccelTime = 0;
+            _currentVerticalAccell = JumpForce;
+            _currentHorizontalAccell = HorizontalAccelForce;
         }
     }
 }
